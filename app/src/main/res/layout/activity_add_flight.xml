@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Title: Add New Flight -->
+    <TextView
+        android:id="@+id/titleAddFlight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add New Flight"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:layout_marginBottom="24dp"/>
+
+    <!-- Flight Matricule -->
+    <EditText
+        android:id="@+id/matriculeFlight"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Matricule Flight"
+        android:inputType="text"
+        android:layout_marginBottom="16dp" />
+    <TextView
+        android:id="@+id/errorMatriculeFlight"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/holo_red_light"
+        android:visibility="gone"/>
+
+    <!-- Flight Date -->
+    <EditText
+        android:id="@+id/flightDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Flight Date (YYYY-MM-DD)"
+        android:inputType="date"
+        android:layout_marginBottom="16dp" />
+    <TextView
+        android:id="@+id/errorFlightDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/holo_red_light"
+        android:visibility="gone"/>
+
+    <!-- From Location -->
+    <EditText
+        android:id="@+id/from"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="From"
+        android:inputType="text"
+        android:layout_marginBottom="16dp" />
+    <TextView
+        android:id="@+id/errorFrom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/holo_red_light"
+        android:visibility="gone"/>
+    <!-- To Location -->
+    <EditText
+        android:id="@+id/to"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="To"
+        android:inputType="text"
+        android:layout_marginBottom="16dp" />
+    <TextView
+        android:id="@+id/errorTo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/holo_red_light"
+        android:visibility="gone"/>
+    <!-- Seats -->
+    <EditText
+        android:id="@+id/seats"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Seats"
+        android:inputType="number"
+        android:layout_marginBottom="16dp" />
+    <TextView
+        android:id="@+id/errorSeats"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/holo_red_light"
+        android:visibility="gone"/>
+    <!-- Departure Time -->
+    <EditText
+        android:id="@+id/departureTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Departure Time (HH:MM)"
+        android:inputType="time"
+        android:layout_marginBottom="16dp" />
+    <TextView
+        android:id="@+id/errorDepartureTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/holo_red_light"
+        android:visibility="gone"/>
+
+    <!-- Arrival Time -->
+    <EditText
+        android:id="@+id/arrivalTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Arrival Time (HH:MM)"
+        android:inputType="time"
+        android:layout_marginBottom="16dp" />
+    <TextView
+        android:id="@+id/errorArrivalTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/holo_red_light"
+        android:visibility="gone"/>
+
+    <!-- Type Flight (Escale or Direct) -->
+    <RadioGroup
+        android:id="@+id/typeFlightGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="16dp">
+
+        <RadioButton
+            android:id="@+id/directFlight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Direct" />
+
+        <RadioButton
+            android:id="@+id/escaleFlight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Escale" />
+    </RadioGroup>
+
+    <!-- Point Escale (only visible when 'Escale' is selected) -->
+    <EditText
+        android:id="@+id/pointEscale"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Point Escale"
+        android:visibility="gone"
+        android:inputType="text"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Buttons -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp">
+
+        <Button
+            android:id="@+id/btnAdd"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Add" />
+
+        <Button
+            android:id="@+id/btnCancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Cancel" />
+    </LinearLayout>
+
+</LinearLayout>

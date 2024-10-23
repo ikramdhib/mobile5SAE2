@@ -43,20 +43,25 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract UserDao userDao();
     public abstract TransportDao transportDao();
     public abstract HotelDao hotelDao();
-    public abstract DiscussionDao discussionDao5();
-    public abstract ResponseDao responseDao();
+    public abstract DiscussionDao discussionDao();
     public abstract FlightDao flightDao();
+    public abstract ResponseDao responseDao();
     public abstract CategorieDao categorieDao();
     public abstract ChambreDao chambreDao();
     public abstract ReservationFlightDao reservationFlightDao();
     public abstract ReservationTransportDao reservationTransportDao();
     public abstract ReservationHotelDao reservationHotelDao();
 
-    public static AppDatabase getAppDatabase(Context context) {
+    // Singleton pattern for database instance
+    public static AppDatabase getAppDatabase(final Context context) {
         if (instance == null) {
-            instance = Room.databaseBuilder(context.getApplicationContext(), AppDatabase.class, "booking_table")
-                    .allowMainThreadQueries()
-                    .build();
+            synchronized (AppDatabase.class) {
+                if (instance == null) {
+                    instance = Room.databaseBuilder(context.getApplicationContext(),
+                                    AppDatabase.class, "booking_table")
+                            .build();  // Removed allowMainThreadQueries for better performance
+                }
+            }
         }
         return instance;
     }

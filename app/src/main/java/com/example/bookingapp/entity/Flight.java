@@ -5,14 +5,15 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
+import java.io.Serializable;
 import java.util.Date;
 @Entity(tableName = "Flights")
-public class Flight {
+public class Flight  implements Serializable {
 @PrimaryKey(autoGenerate = true)
     private int id ;
     @ColumnInfo
-
-    private String FlightDate;
+    private String flightMatricule;
+    private String flightDate;
     @ColumnInfo
 
     private String arrivalTime ;
@@ -41,9 +42,9 @@ public class Flight {
     public Flight() {
     }
 
-    public Flight(int id, String flightDate, String arrivalTime, String departureTime, boolean availability, int nbSeats, String from, String to, int duration, String type) {
+    public Flight(int id, String flightDate,String flightMatricule, String arrivalTime, String departureTime, boolean availability, int nbSeats, String from, String to, int duration, String type) {
         this.id = id;
-        FlightDate = flightDate;
+        this.flightDate = flightDate;
         this.arrivalTime = arrivalTime;
         this.departureTime = departureTime;
         this.availability = availability;
@@ -52,9 +53,10 @@ public class Flight {
         this.to = to;
         this.duration = duration;
         this.type = type;
+        this.flightMatricule = flightMatricule;
     }
 
-    public Flight(String type, int duration, String to, String from, int nbSeats, boolean availability, String departureTime, String flightDate, String arrivalTime) {
+    public Flight(String flightMatricule, String type, int duration, String to, String from, int nbSeats, boolean availability, String departureTime, String flightDate, String arrivalTime) {
         this.type = type;
         this.duration = duration;
         this.to = to;
@@ -62,8 +64,9 @@ public class Flight {
         this.nbSeats = nbSeats;
         this.availability = availability;
         this.departureTime = departureTime;
-        FlightDate = flightDate;
+        this.flightDate = flightDate;
         this.arrivalTime = arrivalTime;
+        this.flightMatricule = flightMatricule;
     }
 
     public int getId() {
@@ -71,7 +74,7 @@ public class Flight {
     }
 
     public String getFlightDate() {
-        return FlightDate;
+        return flightDate;
     }
 
     public String getArrivalTime() {
@@ -111,7 +114,7 @@ public class Flight {
     }
 
     public void setFlightDate(String flightDate) {
-        FlightDate = flightDate;
+        this.flightDate = flightDate;
     }
 
     public void setArrivalTime(String arrivalTime) {
@@ -146,11 +149,20 @@ public class Flight {
         this.type = type;
     }
 
+    public String getFlightMatricule() {
+        return flightMatricule;
+    }
+
+    public void setFlightMatricule(String flightMatricule) {
+        this.flightMatricule = flightMatricule;
+    }
+
     @Override
     public String toString() {
         return "Flight{" +
                 "id=" + id +
-                ", FlightDate=" + FlightDate +
+                ", flightMatricule='" + flightMatricule + '\'' +
+                ", flightDate='" + flightDate + '\'' +
                 ", arrivalTime='" + arrivalTime + '\'' +
                 ", departureTime='" + departureTime + '\'' +
                 ", availability=" + availability +

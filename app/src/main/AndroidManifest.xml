@@ -13,7 +13,13 @@
         android:theme="@style/Theme.BookingApp"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".FlightManagement.FlightDetail"
+            android:exported="false" />
+        <activity
+            android:name=".FlightManagement.FlightAdapter"
+            android:exported="false" />
+        <activity
+            android:name=".FlightManagement.FlightList"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

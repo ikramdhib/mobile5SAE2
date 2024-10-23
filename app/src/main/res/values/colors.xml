@@ -2,4 +2,8 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="gradient_start">#4093CE</color>
+    <color name="gradient_end">#9BCEF3</color>
+    <color name="button_background">#2F7694</color>
+    <color name="text_white">#FFFFFF</color>
 </resources>

@@ -1,4 +1,4 @@
-package com.example.bookingapp;
+package com.example.bookingapp.FlightManagement;
 
 import android.os.Bundle;
 
@@ -8,17 +8,15 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.example.bookingapp.database.AppDatabase;
+import com.example.bookingapp.R;
 
-public class MainActivity extends AppCompatActivity {
-    private AppDatabase database ;
+public class SearchFlight extends AppCompatActivity {
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);  // Toujours appeler super en premier
-        database = AppDatabase.getAppDatabase(this);  // Initialisation après super.onCreate()
-
+        super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_search_flight);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
