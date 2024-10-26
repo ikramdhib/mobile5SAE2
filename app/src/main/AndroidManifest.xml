@@ -21,6 +21,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ListeHotelActivity">
+        </activity>
+        <activity
+            android:name=".RechercheHotelActivity">
+        </activity>
+
     </application>
 
 </manifest>

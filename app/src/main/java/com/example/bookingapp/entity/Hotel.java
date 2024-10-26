@@ -9,97 +9,89 @@ public class Hotel {
     @PrimaryKey(autoGenerate = true)
     private int id;
     @ColumnInfo
-    private String name ;
+    private String name;
     @ColumnInfo
-
-    private String location ;
+    private String location;
     @ColumnInfo
-
     private String description;
     @ColumnInfo
     private boolean available;
     @ColumnInfo
-    private double pricePerNight ;
+    private double pricePerNight;
     @ColumnInfo
-    private double evaluation ;
+    private double evaluation;
+
+
+    // Nouveau champ pour l'ID de l'image drawable
+    @ColumnInfo
+    private int imageResource;
 
     public Hotel() {
     }
-
-    public Hotel(int id, String name, String location, String description, boolean available, double pricePerNight, double evaluation) {
-        this.id = id;
-        this.name = name;
-        this.location = location;
-        this.description = description;
-        this.available = available;
-        this.pricePerNight = pricePerNight;
-        this.evaluation = evaluation;
-    }
-
-    public Hotel(String name, String location, String description, boolean available, double pricePerNight, double evaluation) {
-        this.name = name;
-        this.location = location;
-        this.description = description;
-        this.available = available;
-        this.pricePerNight = pricePerNight;
-        this.evaluation = evaluation;
-    }
-
     public int getId() {
         return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public boolean isAvailable() {
-        return available;
-    }
-
-    public double getPricePerNight() {
-        return pricePerNight;
-    }
-
-    public double getEvaluation() {
-        return evaluation;
     }
 
     public void setId(int id) {
         this.id = id;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getLocation() {
+        return location;
     }
 
     public void setLocation(String location) {
         this.location = location;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public boolean isAvailable() {
+        return available;
     }
 
     public void setAvailable(boolean available) {
         this.available = available;
     }
 
+    public double getPricePerNight() {
+        return pricePerNight;
+    }
+
     public void setPricePerNight(double pricePerNight) {
         this.pricePerNight = pricePerNight;
+    }
+
+    public double getEvaluation() {
+        return evaluation;
     }
 
     public void setEvaluation(double evaluation) {
         this.evaluation = evaluation;
     }
+
+    public int getImageResource() {
+        return imageResource;
+    }
+
+    public void setImageResource(int imageResource) {
+        this.imageResource = imageResource;
+    }
+
 
     @Override
     public String toString() {
@@ -111,6 +103,7 @@ public class Hotel {
                 ", available=" + available +
                 ", pricePerNight=" + pricePerNight +
                 ", evaluation=" + evaluation +
+                ", imageResource=" + imageResource +
                 '}';
     }
 }

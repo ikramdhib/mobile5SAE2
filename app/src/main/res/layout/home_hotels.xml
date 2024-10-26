@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/img"
+    android:padding="16dp">
+
+    <!-- Texte "Where you want to go?" -->
+
+    <TextView
+        android:id="@+id/textTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="70dp"
+        android:text="Where you want to go?"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <!-- Input pour la localisation -->
+    <EditText
+        android:id="@+id/locationInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textTitle"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/rounded_edittext"
+        android:drawableStart="@drawable/baseline_location_on_24"
+        android:inputType="text"
+        android:padding="10dp"
+        android:textColor="#000000"
+        android:textColorHint="#000000" />
+
+    <!-- Input pour la date d'arrivée -->
+    <Button
+        android:id="@+id/checkInDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/locationInput"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/rounded_boutton"
+        android:drawableStart="@drawable/baseline_calendar_month_24"
+        android:padding="10dp"
+        android:text="Date d'arrivée"
+        android:textColor="#000000"
+        android:textColorHint="#757575"
+        />
+
+    <!-- Input pour la date de départ -->
+    <Button
+        android:id="@+id/checkOutDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/checkInDate"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/rounded_boutton"
+        android:drawableStart="@drawable/baseline_calendar_month_24"
+        android:padding="10dp"
+        android:text="Date de départ"
+        android:textColor="#000000"
+        android:textColorHint="#757575"
+        />
+
+    <!-- Input pour le nombre de personnes -->
+    <Button
+        android:id="@+id/peopleInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/checkOutDate"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/rounded_edittext"
+        android:drawableStart="@drawable/baseline_person_24"
+        android:drawableEnd="@android:drawable/ic_menu_more"
+        android:padding="10dp"
+        android:text="2 Adultes, 0 Enfants"
+        android:textColor="#000000"
+        />
+
+    <!-- Bouton de recherche -->
+    <Button
+        android:id="@+id/searchButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/peopleInput"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/selector_buttton"
+        android:text="Rechercher"
+        android:textSize="18sp"
+        android:textColor="#FFFFFF"/>
+
+</RelativeLayout>

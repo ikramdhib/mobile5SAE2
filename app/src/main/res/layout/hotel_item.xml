@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:background="#FFFFFF"
+    android:elevation="4dp"
+    android:padding="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- ImageView pour afficher l'image de l'hôtel -->
+        <ImageView
+            android:id="@+id/hotelImage"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"
+            android:layout_marginBottom="8dp" />
+
+        <!-- Nom de l'hôtel -->
+        <TextView
+            android:id="@+id/hotelName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Nom de l'hôtel"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <!-- Localisation et distance de l'hôtel -->
+        <TextView
+            android:id="@+id/hotelLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Location de l'hotel"
+            android:textColor="#757575"
+            android:textSize="14sp"
+            android:layout_marginTop="4dp" />
+
+        <!-- Tarif de l'hôtel -->
+        <TextView
+            android:id="@+id/hotelPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TND 255"
+            android:textColor="#1957A8"
+            android:textSize="16sp"
+            android:layout_marginTop="8dp" />
+
+        <!-- Nombre d'adultes et enfants -->
+        <TextView
+            android:id="@+id/numberOfGuests"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="3 adultes, pour 1 nuit"
+            android:textColor="#000000"
+            android:textSize="14sp"
+            android:layout_marginTop="4dp" />
+
+        <!-- Statut de réservation ou disponibilité -->
+        <TextView
+            android:id="@+id/reservationStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Disponible"
+            android:textSize="14sp"
+            android:textColor="#FF5722" />
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

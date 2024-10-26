@@ -1,0 +1,14 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Couleur de fond -->
+    <solid android:color="#FFFFFF" />
+
+    <!-- Coins arrondis -->
+    <corners android:radius="16dp" />
+
+    <!-- Ajouter une ombre (en utilisant l'elevation du parent LinearLayout) -->
+    <padding
+        android:left="10dp"
+        android:right="10dp"
+        android:top="10dp"
+        android:bottom="10dp" />
+</shape>

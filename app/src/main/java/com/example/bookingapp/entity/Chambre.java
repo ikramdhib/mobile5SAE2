@@ -16,30 +16,66 @@ public class Chambre {
     @ColumnInfo
     private double pricePerNight ;
     @ColumnInfo
-
     private String type ;
     @ColumnInfo
-
+    private int nbAdultes;
+    @ColumnInfo
+    private int nbEnfants;
+    @ColumnInfo
     private boolean available ;
 
+    @ColumnInfo(name = "hotelId")
     private int hotelId;
 
     public Chambre() {
     }
 
-    public Chambre(double pricePerNight, String type, boolean available, int hotelId) {
-        this.pricePerNight = pricePerNight;
-        this.type = type;
-        this.available = available;
-        this.hotelId = hotelId;
+    public int getId() {
+        return id;
     }
 
-    public Chambre(int id, double pricePerNight, String type, boolean available, int hotelId) {
+    public void setId(int id) {
         this.id = id;
+    }
+
+    public double getPricePerNight() {
+        return pricePerNight;
+    }
+
+    public void setPricePerNight(double pricePerNight) {
         this.pricePerNight = pricePerNight;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
         this.type = type;
+    }
+
+    public int getNbAdultes() {
+        return nbAdultes;
+    }
+
+    public void setNbAdultes(int nbAdultes) {
+        this.nbAdultes = nbAdultes;
+    }
+
+    public int getNbEnfants() {
+        return nbEnfants;
+    }
+
+    public void setNbEnfants(int nbEnfants) {
+        this.nbEnfants = nbEnfants;
+    }
+
+    public boolean isAvailable() {
+        return available;
+    }
+
+    public void setAvailable(boolean available) {
         this.available = available;
-        this.hotelId = hotelId;
     }
 
     public int getHotelId() {
@@ -50,44 +86,14 @@ public class Chambre {
         this.hotelId = hotelId;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public double getPricePerNight() {
-        return pricePerNight;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public boolean isAvailable() {
-        return available;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setPricePerNight(double pricePerNight) {
-        this.pricePerNight = pricePerNight;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public void setAvailable(boolean available) {
-        this.available = available;
-    }
-
     @Override
     public String toString() {
         return "Chambre{" +
                 "id=" + id +
                 ", pricePerNight=" + pricePerNight +
                 ", type='" + type + '\'' +
+                ", nbAdultes=" + nbAdultes +
+                ", nbEnfants=" + nbEnfants +
                 ", available=" + available +
                 ", hotelId=" + hotelId +
                 '}';
