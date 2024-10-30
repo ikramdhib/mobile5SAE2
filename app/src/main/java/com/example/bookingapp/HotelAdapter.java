@@ -1,9 +1,11 @@
 package com.example.bookingapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -34,7 +36,9 @@ public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.HotelViewHol
 
     @Override
     public void onBindViewHolder(@NonNull HotelViewHolder holder, int position) {
+        // Récupérer l'hôtel et les chambres associés à la position actuelle
         HotelWithChambres hotelWithChambres = hotelList.get(position);
+        Hotel hotel = hotelWithChambres.hotel;
         holder.hotelName.setText(hotelWithChambres.hotel.getName());
         holder.hotelLocation.setText(hotelWithChambres.hotel.getLocation());
         holder.hotelPrice.setText("TND " + hotelWithChambres.hotel.getPricePerNight());
@@ -42,6 +46,18 @@ public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.HotelViewHol
 
         // Charger l'image de l'hôtel à partir des ressources drawable
         holder.hotelImage.setImageResource(hotelWithChambres.hotel.getImageResource());
+        holder.bookingButton.setOnClickListener(v -> {
+            Intent intent = new Intent(context, HotelDetailActivity.class);
+            // Passer les informations de l'hôtel via l'intent
+            intent.putExtra("hotelName", hotel.getName());
+            intent.putExtra("hotelLocation", hotel.getLocation());
+            intent.putExtra("hotelPrice", hotel.getPricePerNight());
+            intent.putExtra("hotelDescription", hotel.getDescription());
+            intent.putExtra("hotelAvailable", hotel.isAvailable());
+            intent.putExtra("hotelImage", hotel.getImageResource());
+
+            context.startActivity(intent); // Lancer l'activité de détail
+        });
     }
 
     @Override
@@ -53,6 +69,7 @@ public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.HotelViewHol
 
         TextView hotelName, hotelLocation, hotelPrice, numberOfGuests, reservationStatus;
         ImageView hotelImage;
+        Button bookingButton;
 
         public HotelViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -62,6 +79,7 @@ public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.HotelViewHol
             numberOfGuests = itemView.findViewById(R.id.numberOfGuests);
             reservationStatus = itemView.findViewById(R.id.reservationStatus);
             hotelImage = itemView.findViewById(R.id.hotelImage);
+            bookingButton = itemView.findViewById(R.id.bookingButton);
         }
     }
 }

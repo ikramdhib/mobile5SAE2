@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.NumberPicker;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.bookingapp.database.AppDatabase;
 
 import java.util.Calendar;
+import java.util.Date;
 
 public class RechercheHotelActivity extends AppCompatActivity {
     private AppDatabase database;
@@ -29,6 +31,8 @@ public class RechercheHotelActivity extends AppCompatActivity {
     private String checkOutDate;
     private int nbAdultes = 2; // Valeur par défaut
     private int nbEnfants = 0; // Valeur par défaut
+    private Calendar checkInCalendar = Calendar.getInstance();
+    private Calendar checkOutCalendar = Calendar.getInstance();
 
 
     @Override
@@ -47,20 +51,24 @@ public class RechercheHotelActivity extends AppCompatActivity {
         searchButton = findViewById(R.id.searchButton);
 
         // Sélection de la date d'arrivée
-        checkInDateButton.setOnClickListener(v -> showDatePicker(checkInDateButton));
+        checkInDateButton.setOnClickListener(v -> showDatePicker(checkInDateButton, true));
 
         // Sélection de la date de départ
-        checkOutDateButton.setOnClickListener(v -> showDatePicker(checkOutDateButton));
+        checkOutDateButton.setOnClickListener(v -> showDatePicker(checkOutDateButton, false));
 
         // Sélection du nombre d'adultes, enfants et chambres
         peopleInputButton.setOnClickListener(v -> showPeoplePickerDialog());
 
         // Action sur le bouton de recherche
-        searchButton.setOnClickListener(v -> performSearch());
+        searchButton.setOnClickListener(v -> {
+            if (validateDates()) {
+                performSearch();
+            }
+        });
     }
 
     // Méthode pour afficher un DatePickerDialog
-    private void showDatePicker(final Button button) {
+    private void showDatePicker(final Button button, boolean isCheckIn) {
         final Calendar calendar = Calendar.getInstance();
         int year = calendar.get(Calendar.YEAR);
         int month = calendar.get(Calendar.MONTH);
@@ -69,12 +77,25 @@ public class RechercheHotelActivity extends AppCompatActivity {
         DatePickerDialog datePickerDialog = new DatePickerDialog(this, (view, year1, month1, dayOfMonth) -> {
             String date = dayOfMonth + "/" + (month1 + 1) + "/" + year1;
             button.setText(date);
-            if (button.getId() == R.id.checkInDate) {
+            // Mettre à jour la date dans le bon calendrier
+            if (isCheckIn) {
+                checkInCalendar.set(year1, month1, dayOfMonth);
                 checkInDate = date;
             } else {
+                checkOutCalendar.set(year1, month1, dayOfMonth);
                 checkOutDate = date;
             }
         }, year, month, day);
+
+        // Si on choisit la date d'arrivée, on empêche la sélection de dates antérieures à aujourd'hui
+        if (isCheckIn) {
+            datePickerDialog.getDatePicker().setMinDate(calendar.getTimeInMillis());
+        }
+
+        // Si on choisit la date de départ, on empêche la sélection de dates antérieures à la date d'arrivée
+        if (!isCheckIn && checkInDate != null) {
+            datePickerDialog.getDatePicker().setMinDate(checkInCalendar.getTimeInMillis());
+        }
         datePickerDialog.show();
     }
 
@@ -111,10 +132,35 @@ public class RechercheHotelActivity extends AppCompatActivity {
 
         builder.create().show();
     }
+    private boolean validateDates() {
+        Date today = Calendar.getInstance().getTime();
+
+        if (checkInCalendar.getTime().before(today)) {
+            Toast.makeText(this, "La date d'arrivée ne peut pas être antérieure à aujourd'hui.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (checkOutCalendar.getTime().before(checkInCalendar.getTime())) {
+            Toast.makeText(this, "La date de départ doit être après la date d'arrivée.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        return true;
+    }
+
 
     // Méthode pour effectuer la recherche
     private void performSearch() {
-        String location = locationInput.getText().toString();
+        // Récupérer le texte de l'input location
+        String location = locationInput.getText().toString().trim();
+
+        // Vérifier si le champ location est vide
+        if (location.isEmpty()) {
+            // Afficher un message d'erreur à l'utilisateur
+            locationInput.setError("La localisation est obligatoire");
+            locationInput.requestFocus(); // Fait en sorte que l'EditText soit actif
+            return; // Arrête la méthode ici
+        }
         Log.d("Recherche", "Location: " + location);
         Log.d("Recherche", "Check-in: " + checkInDate);
         Log.d("Recherche", "Check-out: " + checkOutDate);

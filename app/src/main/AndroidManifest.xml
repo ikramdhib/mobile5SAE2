@@ -27,6 +27,9 @@
         <activity
             android:name=".RechercheHotelActivity">
         </activity>
+        <activity
+            android:name=".HotelDetailActivity">
+        </activity>
 
     </application>
 

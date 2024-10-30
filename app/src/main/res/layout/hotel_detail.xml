@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="@color/blue2">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Image de l'hôtel -->
+        <ImageView
+            android:id="@+id/hotelImageDetail"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- Nom de l'hôtel -->
+        <TextView
+            android:id="@+id/hotelNameDetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nom de l'hôtel"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            android:layout_marginBottom="8dp"/>
+
+        <!-- Localisation de l'hôtel -->
+        <TextView
+            android:id="@+id/hotelLocationDetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Location"
+            android:textSize="16sp"
+            android:textColor="#757575"
+            android:layout_marginBottom="8dp"/>
+
+        <!-- Prix de l'hôtel -->
+        <TextView
+            android:id="@+id/hotelPriceDetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TND 255"
+            android:textSize="18sp"
+            android:textColor="#1957A8"
+            android:layout_marginBottom="8dp"/>
+
+        <!-- Description de l'hôtel -->
+        <TextView
+            android:id="@+id/hotelDescriptionDetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Description de l'hôtel"
+            android:textSize="16sp"
+            android:textColor="#000000"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- Bouton pour réserver -->
+        <Button
+            android:id="@+id/reserveButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Réserver"
+            android:backgroundTint="@color/blue3"
+            android:textColor="#FFFFFF"
+            android:padding="12dp"/>
+    </LinearLayout>
+</ScrollView>

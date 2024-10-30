@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+
+    <!-- Couleur de fond du cercle -->
+    <solid android:color="#FFC107"/> <!-- Couleur de fond jaune pour ressembler à l'étoile de la capture -->
+
+    <!-- Bordure du cercle, facultatif -->
+    <stroke
+        android:width="2dp"
+        android:color="#FFFFFF"/> <!-- Couleur blanche autour du cercle, ajustable -->
+
+    <!-- Taille par défaut du cercle, peut être ajustée si nécessaire -->
+    <size
+        android:width="40dp"
+        android:height="40dp"/>
+
+</shape>
