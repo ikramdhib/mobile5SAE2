@@ -39,6 +39,12 @@
         <activity
             android:name=".GestionChambreActivity">
         </activity>
+        <activity
+            android:name=".GestionHotelActivity">
+        </activity>
+        <activity
+            android:name=".AddEditHotelActivity">
+        </activity>
 
     </application>
 

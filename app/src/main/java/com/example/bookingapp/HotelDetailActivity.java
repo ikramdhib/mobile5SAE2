@@ -21,7 +21,7 @@ public class HotelDetailActivity extends AppCompatActivity {
         ImageButton backButton = findViewById(R.id.backButton);
         backButton.setOnClickListener(v -> finish());
 
-        // Initialisation des vues
+
         hotelName = findViewById(R.id.hotelNameDetail);
         hotelLocation = findViewById(R.id.hotelLocationDetail);
         hotelPrice = findViewById(R.id.hotelPriceDetail);
@@ -30,7 +30,7 @@ public class HotelDetailActivity extends AppCompatActivity {
         hotelRoomType = findViewById(R.id.hotelRoomTypeDetail);
         reserveButton = findViewById(R.id.reserveButton);
 
-        // Récupérer les données passées via l'Intent
+
         String name = getIntent().getStringExtra("hotelName");
         String location = getIntent().getStringExtra("hotelLocation");
         double price = getIntent().getDoubleExtra("hotelPrice", 0);
@@ -40,14 +40,13 @@ public class HotelDetailActivity extends AppCompatActivity {
         String checkInDate = getIntent().getStringExtra("checkInDate");
         String checkOutDate = getIntent().getStringExtra("checkOutDate");
 
-        // Définir les données dans l'interface
         hotelName.setText(name);
         hotelLocation.setText(location);
         hotelPrice.setText("TND " + price);
         hotelDescription.setText(description);
         hotelImage.setImageResource(imageResource);
         if (roomType != null) {
-            hotelRoomType.setText(roomType);  // Définir le type de chambre
+            hotelRoomType.setText(roomType);
         } else {
             hotelRoomType.setText("Type de chambre non spécifié");
         }
@@ -58,7 +57,7 @@ public class HotelDetailActivity extends AppCompatActivity {
             intent.putExtra("hotelName", name);
             intent.putExtra("hotelLocation", location);
             intent.putExtra("hotelPrice", price);
-            intent.putExtra("checkInDate", checkInDate);  // Si vous avez des dates pré-remplies
+            intent.putExtra("checkInDate", checkInDate);
             intent.putExtra("checkOutDate", checkOutDate);
             intent.putExtra("hotelRoomType", roomType);
             startActivity(intent);

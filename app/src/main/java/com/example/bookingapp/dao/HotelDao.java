@@ -1,8 +1,10 @@
 package com.example.bookingapp.dao;
 
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import com.example.bookingapp.entity.Hotel;
 import com.example.bookingapp.entity.HotelWithChambres;
@@ -29,6 +31,22 @@ public interface HotelDao {
     List<HotelWithChambres> searchHotels(String location, int minAdultes, int minEnfants, String checkInDate, String checkOutDate);
     @Query("SELECT * FROM Hotels WHERE userId = :userId")
     List<Hotel> getHotelsByUserId(int userId);
+
+    // Mettre à jour un hôtel existant
+    @Update
+    void updateHotel(Hotel hotel);
+
+    // Supprimer un hôtel
+    @Delete
+    void deleteHotel(Hotel hotel);
+
+    // Récupérer un hôtel par son ID
+    @Query("SELECT * FROM Hotels WHERE id = :hotelId")
+    Hotel getHotelById(int hotelId);
+
+    // Récupérer les hôtels disponibles
+    @Query("SELECT * FROM Hotels WHERE available = 1")
+    List<Hotel> getAvailableHotels();
 
 
 

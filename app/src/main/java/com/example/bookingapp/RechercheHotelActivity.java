@@ -40,26 +40,20 @@ public class RechercheHotelActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_hotels);
 
-        // Initialisation de la base de données
         database = AppDatabase.getAppDatabase(this);
 
-        // Initialiser les éléments de l'interface
         locationInput = findViewById(R.id.locationInput);
         checkInDateButton = findViewById(R.id.checkInDate);
         checkOutDateButton = findViewById(R.id.checkOutDate);
         peopleInputButton = findViewById(R.id.peopleInput);
         searchButton = findViewById(R.id.searchButton);
 
-        // Sélection de la date d'arrivée
         checkInDateButton.setOnClickListener(v -> showDatePicker(checkInDateButton, true));
 
-        // Sélection de la date de départ
         checkOutDateButton.setOnClickListener(v -> showDatePicker(checkOutDateButton, false));
 
-        // Sélection du nombre d'adultes, enfants et chambres
         peopleInputButton.setOnClickListener(v -> showPeoplePickerDialog());
 
-        // Action sur le bouton de recherche
         searchButton.setOnClickListener(v -> {
             if (validateDates()) {
                 performSearch();
@@ -67,7 +61,6 @@ public class RechercheHotelActivity extends AppCompatActivity {
         });
     }
 
-    // Méthode pour afficher un DatePickerDialog
     private void showDatePicker(final Button button, boolean isCheckIn) {
         final Calendar calendar = Calendar.getInstance();
         int year = calendar.get(Calendar.YEAR);
@@ -77,7 +70,6 @@ public class RechercheHotelActivity extends AppCompatActivity {
         DatePickerDialog datePickerDialog = new DatePickerDialog(this, (view, year1, month1, dayOfMonth) -> {
             String date = dayOfMonth + "/" + (month1 + 1) + "/" + year1;
             button.setText(date);
-            // Mettre à jour la date dans le bon calendrier
             if (isCheckIn) {
                 checkInCalendar.set(year1, month1, dayOfMonth);
                 checkInDate = date;
@@ -87,29 +79,24 @@ public class RechercheHotelActivity extends AppCompatActivity {
             }
         }, year, month, day);
 
-        // Si on choisit la date d'arrivée, on empêche la sélection de dates antérieures à aujourd'hui
         if (isCheckIn) {
             datePickerDialog.getDatePicker().setMinDate(calendar.getTimeInMillis());
         }
 
-        // Si on choisit la date de départ, on empêche la sélection de dates antérieures à la date d'arrivée
         if (!isCheckIn && checkInDate != null) {
             datePickerDialog.getDatePicker().setMinDate(checkInCalendar.getTimeInMillis());
         }
         datePickerDialog.show();
     }
 
-    // Méthode pour afficher un AlertDialog pour choisir le nombre d'adultes, d'enfants et de chambres
     private void showPeoplePickerDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         View dialogView = getLayoutInflater().inflate(R.layout.dialog_people_picker, null);
         builder.setView(dialogView);
 
-        // Initialiser les NumberPickers
         NumberPicker npAdultes = dialogView.findViewById(R.id.npAdultes);
         NumberPicker npEnfants = dialogView.findViewById(R.id.npEnfants);
 
-        // Configurer les limites des NumberPickers
         npAdultes.setMinValue(1);
         npAdultes.setMaxValue(10);
         npAdultes.setValue(nbAdultes);
@@ -120,11 +107,9 @@ public class RechercheHotelActivity extends AppCompatActivity {
 
 
         builder.setPositiveButton("OK", (dialog, which) -> {
-            // Récupérer les valeurs sélectionnées
             nbAdultes = npAdultes.getValue();
             nbEnfants = npEnfants.getValue();
 
-            // Mettre à jour le texte du bouton
             peopleInputButton.setText(nbAdultes + " Adultes, " + nbEnfants + " Enfants, ");
         });
 
@@ -148,18 +133,15 @@ public class RechercheHotelActivity extends AppCompatActivity {
         return true;
     }
 
-
-    // Méthode pour effectuer la recherche
     private void performSearch() {
-        // Récupérer le texte de l'input location
+
         String location = locationInput.getText().toString().trim();
 
         // Vérifier si le champ location est vide
         if (location.isEmpty()) {
-            // Afficher un message d'erreur à l'utilisateur
             locationInput.setError("La localisation est obligatoire");
-            locationInput.requestFocus(); // Fait en sorte que l'EditText soit actif
-            return; // Arrête la méthode ici
+            locationInput.requestFocus();
+            return;
         }
         Log.d("Recherche", "Location: " + location);
         Log.d("Recherche", "Check-in: " + checkInDate);

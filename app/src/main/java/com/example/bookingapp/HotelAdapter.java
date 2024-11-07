@@ -42,7 +42,6 @@ public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.HotelViewHol
 
     @Override
     public void onBindViewHolder(@NonNull HotelViewHolder holder, int position) {
-        // Récupérer l'hôtel et les chambres associés à la position actuelle
         HotelWithChambres hotelWithChambres = hotelList.get(position);
         Hotel hotel = hotelWithChambres.hotel;
         holder.hotelName.setText(hotelWithChambres.hotel.getName());
@@ -50,17 +49,15 @@ public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.HotelViewHol
         holder.hotelPrice.setText("TND " + hotelWithChambres.hotel.getPricePerNight());
         holder.reservationStatus.setText(hotelWithChambres.hotel.isAvailable() ? "Disponible" : "Non disponible");
         String chambreType = "Non disponible";
-        // Parcourir les chambres pour trouver celle qui correspond aux critères de recherche
+
         for (Chambre chambre : hotelWithChambres.chambres) {
-                // Si la chambre correspond, récupérer le type
             chambreType = "Type de chambre: " + chambre.getType();
         }
-        final String finalChambreType = chambreType; // Make chambreType effectively final by copying to a new final variable
+        final String finalChambreType = chambreType;
         holder.hotelRoomType.setText(finalChambreType);
         holder.hotelImage.setImageResource(hotelWithChambres.hotel.getImageResource());
         holder.bookingButton.setOnClickListener(v -> {
             Intent intent = new Intent(context, HotelDetailActivity.class);
-            // Passer les informations de l'hôtel via l'intent
             intent.putExtra("hotelName", hotel.getName());
             intent.putExtra("hotelLocation", hotel.getLocation());
             intent.putExtra("hotelPrice", hotel.getPricePerNight());
@@ -71,7 +68,7 @@ public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.HotelViewHol
             intent.putExtra("checkOutDate", checkOutDate);
             intent.putExtra("hotelRoomType", finalChambreType);
 
-            context.startActivity(intent); // Lancer l'activité de détail
+            context.startActivity(intent);
         });
     }
 

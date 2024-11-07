@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_recherche_hotel"
+        android:title="Recherche Hôtel" />
+    <item
+        android:id="@+id/nav_list_hotel"
+        android:title="Liste des Hôtels" />
+    <!-- Ajoutez d'autres éléments ici si nécessaire -->
+</menu>
