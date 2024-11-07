@@ -33,6 +33,12 @@
         <activity
             android:name=".ReservationActivity">
         </activity>
+        <activity
+            android:name=".AddEditChambreActivity">
+        </activity>
+        <activity
+            android:name=".GestionChambreActivity">
+        </activity>
 
     </application>
 

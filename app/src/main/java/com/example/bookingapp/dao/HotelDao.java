@@ -23,11 +23,13 @@ public interface HotelDao {
             "  FROM Chambre c " +
             "  WHERE c.nbAdultes = :minAdultes " +
             "  AND c.nbEnfants = :minEnfants " +
-            "  AND c.available = 1 " +
             "  AND c.dateDebutDisponibilite <= :checkInDate " +
             "  AND c.dateFinDisponibilite >= :checkOutDate" +
             ")")
     List<HotelWithChambres> searchHotels(String location, int minAdultes, int minEnfants, String checkInDate, String checkOutDate);
+    @Query("SELECT * FROM Hotels WHERE userId = :userId")
+    List<Hotel> getHotelsByUserId(int userId);
+
 
 
 }

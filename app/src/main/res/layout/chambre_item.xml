@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="12dp"
+    android:background="@drawable/card_background"
+    android:layout_marginBottom="8dp">
+
+    <!-- Type de chambre -->
+    <TextView
+        android:id="@+id/chambreType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Type: Suite"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="#1957A8" />
+
+    <!-- Prix de la chambre -->
+    <TextView
+        android:id="@+id/chambrePrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Prix: TND 200"
+        android:textSize="14sp"
+        android:textColor="#757575" />
+
+    <!-- Disponibilité -->
+    <TextView
+        android:id="@+id/chambreAvailability"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Disponibilité: Oui"
+        android:textSize="14sp"
+        android:textColor="#757575" />
+
+    <!-- Capacité -->
+    <TextView
+        android:id="@+id/chambreCapacity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Capacité: 2 Adultes, 1 Enfant"
+        android:textSize="14sp"
+        android:textColor="#757575" />
+</LinearLayout>

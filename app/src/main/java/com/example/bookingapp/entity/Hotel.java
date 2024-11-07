@@ -20,6 +20,8 @@ public class Hotel {
     private double pricePerNight;
     @ColumnInfo
     private double evaluation;
+    @ColumnInfo
+    private int userId;
 
 
     // Nouveau champ pour l'ID de l'image drawable
@@ -92,6 +94,13 @@ public class Hotel {
         this.imageResource = imageResource;
     }
 
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
 
     @Override
     public String toString() {
@@ -103,6 +112,7 @@ public class Hotel {
                 ", available=" + available +
                 ", pricePerNight=" + pricePerNight +
                 ", evaluation=" + evaluation +
+                ", userId=" + userId +
                 ", imageResource=" + imageResource +
                 '}';
     }

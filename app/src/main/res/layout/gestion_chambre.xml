@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@color/blue2">
+
+    <!-- Titre de la section -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Gestion des Chambres"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"
+        android:gravity="center"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Liste des chambres -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewChambres"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/card_background"
+        android:padding="8dp"
+        android:elevation="4dp" />
+
+    <!-- Boutons d'action pour ajouter, modifier et supprimer une chambre -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginBottom="16dp">
+
+        <!-- Bouton Ajouter -->
+        <Button
+            android:id="@+id/btnAddChambre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ajouter"
+            android:backgroundTint="@color/blue3"
+            android:textColor="#FFFFFF"
+            android:paddingVertical="12dp"
+            android:layout_marginEnd="8dp" />
+
+        <!-- Bouton Modifier -->
+        <Button
+            android:id="@+id/btnEditChambre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Modifier"
+            android:backgroundTint="@color/blue3"
+            android:textColor="#FFFFFF"
+            android:paddingVertical="12dp"
+            android:layout_marginEnd="8dp" />
+
+        <!-- Bouton Supprimer -->
+        <Button
+            android:id="@+id/btnDeleteChambre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Supprimer"
+            android:backgroundTint="@color/blue3"
+            android:textColor="#FFFFFF"
+            android:paddingVertical="12dp" />
+    </LinearLayout>
+
+    <!-- Section pour associer une chambre à un hôtel -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Associer à un Hôtel"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"
+        android:layout_marginBottom="8dp" />
+
+    <Spinner
+        android:id="@+id/spinnerHotels"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:spinnerMode="dropdown"
+        android:layout_marginBottom="16dp"/>
+        <!--android:background="@drawable/spinner_background"-->
+
+
+    <!-- Bouton de confirmation pour l'association de la chambre à l'hôtel -->
+    <Button
+        android:id="@+id/btnConfirmAssociation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Associer la Chambre"
+        android:backgroundTint="@color/blue3"
+        android:textColor="#FFFFFF"
+        android:paddingVertical="12dp" />
+</LinearLayout>

@@ -21,8 +21,8 @@ public class Chambre {
     private int nbAdultes;
     @ColumnInfo
     private int nbEnfants;
-    @ColumnInfo
-    private boolean available ;
+    /*@ColumnInfo
+    private boolean available ;*/
     @ColumnInfo
     private String dateDebutDisponibilite;
     @ColumnInfo
@@ -89,13 +89,6 @@ public class Chambre {
         this.nbEnfants = nbEnfants;
     }
 
-    public boolean isAvailable() {
-        return available;
-    }
-
-    public void setAvailable(boolean available) {
-        this.available = available;
-    }
 
     public int getHotelId() {
         return hotelId;
@@ -113,7 +106,6 @@ public class Chambre {
                 ", type='" + type + '\'' +
                 ", nbAdultes=" + nbAdultes +
                 ", nbEnfants=" + nbEnfants +
-                ", available=" + available +
                 ", dateDebutDisponibilite='" + dateDebutDisponibilite + '\'' +
                 ", dateFinDisponibilite='" + dateFinDisponibilite + '\'' +
                 ", hotelId=" + hotelId +
