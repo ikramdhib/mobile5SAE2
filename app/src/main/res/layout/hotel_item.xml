@@ -65,6 +65,16 @@
             android:textSize="14sp"
             android:layout_marginTop="4dp"
             android:layout_marginLeft="20dp"/>
+        <TextView
+            android:id="@+id/hotelRoomType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:textColor="#757575"
+            android:textSize="14sp"
+            android:layout_marginTop="4dp"
+            android:layout_marginLeft="20dp"/>
+
 
         <!-- Tarif de l'hôtel -->
         <TextView

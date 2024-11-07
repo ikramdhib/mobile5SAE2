@@ -31,9 +31,7 @@ public class MainActivity extends AppCompatActivity {
         Button btnShowHotels = findViewById(R.id.btnShowHotels);
         insertSampleHotels();
 
-        // Définir l'action lors du clic sur le bouton
         btnShowHotels.setOnClickListener(v -> {
-            // Démarrer l'activité ListeHotelActivity
             Intent intent = new Intent(MainActivity.this, RechercheHotelActivity.class);
             startActivity(intent);
         });
@@ -62,11 +60,8 @@ public class MainActivity extends AppCompatActivity {
                 hotel1.setEvaluation(4.5);
                 hotel1.setImageResource(R.drawable.img1);
                 long hotel1Id = database.hotelDao().insertHotel(hotel1);
-
-                // Insertion des chambres pour l'hôtel 1
                 insertSampleChambres((int) hotel1Id);
 
-                // Insertion de l'hôtel 2
                 Hotel hotel2 = new Hotel();
                 hotel2.setName("Hôtel de New York");
                 hotel2.setLocation("New York");
@@ -76,11 +71,7 @@ public class MainActivity extends AppCompatActivity {
                 hotel2.setEvaluation(4.7);
                 hotel2.setImageResource(R.drawable.img4);
                 long hotel2Id = database.hotelDao().insertHotel(hotel2);
-
-                // Insertion des chambres pour l'hôtel 2
                 insertSampleChambres((int) hotel2Id);
-
-                // Insertion de l'hôtel 3
                 Hotel hotel3 = new Hotel();
                 hotel3.setName("Hôtel de Londres");
                 hotel3.setLocation("Londres");
@@ -90,8 +81,6 @@ public class MainActivity extends AppCompatActivity {
                 hotel3.setEvaluation(4.9);
                 hotel3.setImageResource(R.drawable.img5);
                 long hotel3Id = database.hotelDao().insertHotel(hotel3);
-
-                // Insertion des chambres pour l'hôtel 3
                 insertSampleChambres((int) hotel3Id);
 
                 Log.d("MainActivity", "Sample hotels inserted.");
@@ -107,6 +96,8 @@ public class MainActivity extends AppCompatActivity {
         chambre1.setNbEnfants(1);
         chambre1.setAvailable(true);
         chambre1.setPricePerNight(100.0);
+        chambre1.setDateDebutDisponibilite("2024-11-07"); // Date de début de disponibilité
+        chambre1.setDateFinDisponibilite("2024-11-25");
 
         Chambre chambre2 = new Chambre();
         chambre2.setHotelId(hotelId); // Lier la chambre à l'hôtel
@@ -115,6 +106,9 @@ public class MainActivity extends AppCompatActivity {
         chambre2.setNbEnfants(2);
         chambre2.setAvailable(true);
         chambre2.setPricePerNight(200.0);
+        chambre2.setDateDebutDisponibilite("2024-12-01"); // Date de début de disponibilité
+        chambre2.setDateFinDisponibilite("2024-12-20");
+
 
         // Insérer les chambres dans la base de données
         database.chambreDao().insertChambre(chambre1);

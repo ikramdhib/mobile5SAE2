@@ -23,9 +23,28 @@ public class Chambre {
     private int nbEnfants;
     @ColumnInfo
     private boolean available ;
-
+    @ColumnInfo
+    private String dateDebutDisponibilite;
+    @ColumnInfo
+    private String dateFinDisponibilite;
     @ColumnInfo(name = "hotelId")
     private int hotelId;
+
+    public String getDateDebutDisponibilite() {
+        return dateDebutDisponibilite;
+    }
+
+    public void setDateDebutDisponibilite(String dateDebutDisponibilite) {
+        this.dateDebutDisponibilite = dateDebutDisponibilite;
+    }
+
+    public String getDateFinDisponibilite() {
+        return dateFinDisponibilite;
+    }
+
+    public void setDateFinDisponibilite(String dateFinDisponibilite) {
+        this.dateFinDisponibilite = dateFinDisponibilite;
+    }
 
     public Chambre() {
     }
@@ -95,7 +114,11 @@ public class Chambre {
                 ", nbAdultes=" + nbAdultes +
                 ", nbEnfants=" + nbEnfants +
                 ", available=" + available +
+                ", dateDebutDisponibilite='" + dateDebutDisponibilite + '\'' +
+                ", dateFinDisponibilite='" + dateFinDisponibilite + '\'' +
                 ", hotelId=" + hotelId +
                 '}';
     }
+
+
 }

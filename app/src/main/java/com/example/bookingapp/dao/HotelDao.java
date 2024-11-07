@@ -16,14 +16,18 @@ public interface HotelDao {
     List<Hotel> getAllHotels();
     @Insert
     long insertHotel(Hotel hotel);
-
-    // Recherche d'hôtels selon les critères spécifiés
     @Query("SELECT * FROM Hotels h " +
-            "INNER JOIN Chambre c ON h.id = c.hotelId " +
             "WHERE h.location LIKE :location " +
-            "AND c.nbAdultes >= :minAdultes " +
-            "AND c.nbEnfants >= :minEnfants " +
-            "AND c.available = 1 " +
-            "GROUP BY h.id ")
-    List<HotelWithChambres> searchHotels(String location, int minAdultes, int minEnfants);
+            "AND h.id IN (" +
+            "  SELECT c.hotelId " +
+            "  FROM Chambre c " +
+            "  WHERE c.nbAdultes = :minAdultes " +
+            "  AND c.nbEnfants = :minEnfants " +
+            "  AND c.available = 1 " +
+            "  AND c.dateDebutDisponibilite <= :checkInDate " +
+            "  AND c.dateFinDisponibilite >= :checkOutDate" +
+            ")")
+    List<HotelWithChambres> searchHotels(String location, int minAdultes, int minEnfants, String checkInDate, String checkOutDate);
+
+
 }

@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.bookingapp.entity.Chambre;
 import com.example.bookingapp.entity.Hotel;
 import com.example.bookingapp.entity.HotelWithChambres;
 
@@ -21,10 +22,15 @@ public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.HotelViewHol
 
     private final List<HotelWithChambres> hotelList;
     private final Context context;
+    private final String checkInDate;
+    private final String checkOutDate;
 
-    public HotelAdapter(List<HotelWithChambres> hotelList, Context context) {
+    public HotelAdapter(List<HotelWithChambres> hotelList, Context context, String checkInDate, String checkOutDate) {
         this.hotelList = hotelList;
         this.context = context;
+        this.checkInDate = checkInDate;
+        this.checkOutDate = checkOutDate;
+
     }
 
     @NonNull
@@ -43,8 +49,14 @@ public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.HotelViewHol
         holder.hotelLocation.setText(hotelWithChambres.hotel.getLocation());
         holder.hotelPrice.setText("TND " + hotelWithChambres.hotel.getPricePerNight());
         holder.reservationStatus.setText(hotelWithChambres.hotel.isAvailable() ? "Disponible" : "Non disponible");
-
-        // Charger l'image de l'hôtel à partir des ressources drawable
+        String chambreType = "Non disponible";
+        // Parcourir les chambres pour trouver celle qui correspond aux critères de recherche
+        for (Chambre chambre : hotelWithChambres.chambres) {
+                // Si la chambre correspond, récupérer le type
+            chambreType = "Type de chambre: " + chambre.getType();
+        }
+        final String finalChambreType = chambreType; // Make chambreType effectively final by copying to a new final variable
+        holder.hotelRoomType.setText(finalChambreType);
         holder.hotelImage.setImageResource(hotelWithChambres.hotel.getImageResource());
         holder.bookingButton.setOnClickListener(v -> {
             Intent intent = new Intent(context, HotelDetailActivity.class);
@@ -55,6 +67,9 @@ public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.HotelViewHol
             intent.putExtra("hotelDescription", hotel.getDescription());
             intent.putExtra("hotelAvailable", hotel.isAvailable());
             intent.putExtra("hotelImage", hotel.getImageResource());
+            intent.putExtra("checkInDate", checkInDate);
+            intent.putExtra("checkOutDate", checkOutDate);
+            intent.putExtra("hotelRoomType", finalChambreType);
 
             context.startActivity(intent); // Lancer l'activité de détail
         });
@@ -67,7 +82,7 @@ public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.HotelViewHol
 
     public static class HotelViewHolder extends RecyclerView.ViewHolder {
 
-        TextView hotelName, hotelLocation, hotelPrice, numberOfGuests, reservationStatus;
+        TextView hotelName, hotelLocation, hotelPrice, numberOfGuests, reservationStatus, hotelRoomType;
         ImageView hotelImage;
         Button bookingButton;
 
@@ -78,6 +93,7 @@ public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.HotelViewHol
             hotelPrice = itemView.findViewById(R.id.hotelPrice);
             numberOfGuests = itemView.findViewById(R.id.numberOfGuests);
             reservationStatus = itemView.findViewById(R.id.reservationStatus);
+            hotelRoomType = itemView.findViewById(R.id.hotelRoomType);
             hotelImage = itemView.findViewById(R.id.hotelImage);
             bookingButton = itemView.findViewById(R.id.bookingButton);
         }

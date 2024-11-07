@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bookingapp.database.AppDatabase;
-import com.example.bookingapp.entity.Hotel;
 import com.example.bookingapp.entity.HotelWithChambres;
 
 import java.util.List;
@@ -29,19 +28,21 @@ public class ListeHotelActivity extends AppCompatActivity {
         String location = getIntent().getStringExtra("location");
         int nbAdultes = getIntent().getIntExtra("nbAdultes", 2);
         int nbEnfants = getIntent().getIntExtra("nbEnfants", 0);
+        String checkInDate = getIntent().getStringExtra("checkInDate");
+        String checkOutDate = getIntent().getStringExtra("checkOutDate");
 
         // Charger les hôtels depuis la base de données
-        loadHotels(location, nbAdultes, nbEnfants);
+        loadHotels(location, nbAdultes, nbEnfants, checkInDate,checkOutDate);
     }
 
-    private void loadHotels(String location, int nbAdultes, int nbEnfants) {
+    private void loadHotels(String location, int nbAdultes, int nbEnfants,String checkInDate, String checkOutDate) {
         new Thread(() -> {
-            // Récupérer les hôtels correspondants aux critères de recherche
-            List<HotelWithChambres> hotels = database.hotelDao().searchHotels("%" + location + "%", nbAdultes, nbEnfants);
+            List<HotelWithChambres> hotels = database.hotelDao().searchHotels(
+                    "%" + location + "%", nbAdultes, nbEnfants, checkInDate, checkOutDate);
 
             // Mettre à jour l'interface utilisateur sur le thread principal
             runOnUiThread(() -> {
-                hotelAdapter = new HotelAdapter(hotels, this);
+                hotelAdapter = new HotelAdapter(hotels, this, checkInDate, checkOutDate);
                 recyclerView.setAdapter(hotelAdapter);
             });
         }).start();

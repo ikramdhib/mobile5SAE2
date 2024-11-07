@@ -30,6 +30,9 @@
         <activity
             android:name=".HotelDetailActivity">
         </activity>
+        <activity
+            android:name=".ReservationActivity">
+        </activity>
 
     </application>
 
