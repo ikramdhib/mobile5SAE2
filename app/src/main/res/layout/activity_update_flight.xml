@@ -10,7 +10,7 @@
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Ajouter un nouveau vol"
+        android:text="Modifier le vol"
         android:textSize="24sp"
         android:textColor="@android:color/white"
         android:textStyle="bold"
@@ -115,47 +115,54 @@
             android:text="depart heur"
             android:textColor="@android:color/white" />
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/selectedArrivalTime"
+            android:layout_width="212dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/rounded_edit_text"
+            android:enabled="false"
+            android:hint="Heure d arrivée"
+            android:padding="12dp" />
+
+        <Button
+            android:id="@+id/arrivalTimeButton"
+            android:layout_width="138dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="12dp"
+            android:backgroundTint="@color/button_background"
+            android:text="arriver heur"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
 <LinearLayout
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content">
-
-    <EditText
-        android:id="@+id/selectedArrivalTime"
-        android:layout_width="212dp"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="5dp"
-        android:layout_marginBottom="12dp"
-        android:background="@drawable/rounded_edit_text"
-        android:enabled="false"
-        android:hint="Heure d arrivée"
-        android:padding="12dp" />
-
-    <Button
-        android:id="@+id/arrivalTimeButton"
-        android:layout_width="138dp"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="12dp"
-        android:backgroundTint="@color/button_background"
-        android:text="arriver heur"
-        android:textColor="@android:color/white" />
-</LinearLayout>
 
     <Button
         android:id="@+id/btnAdd"
-        android:layout_width="380dp"
+        android:layout_width="157dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="12dp"
         android:backgroundTint="@color/button_background"
         android:text="Ajouter le vol"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="20dp"
         android:textColor="@android:color/white" />
 
     <!-- Bouton Annuler -->
     <Button
         android:id="@+id/btnCancel"
-        android:layout_width="match_parent"
+        android:layout_width="155dp"
         android:layout_height="wrap_content"
-        android:text="Annuler"
-        android:textColor="@android:color/black"
+        android:layout_marginBottom="12dp"
         android:backgroundTint="@color/grey"
-        android:layout_marginBottom="12dp" />
+        android:layout_marginLeft="10dp"
+        android:text="Annuler"
+        android:textColor="@android:color/black" />
+</LinearLayout>
 </LinearLayout>

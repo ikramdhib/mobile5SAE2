@@ -1,14 +1,17 @@
 package com.example.bookingapp.FlightManagement;
 
+import android.annotation.SuppressLint;
+import android.app.TimePickerDialog;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.os.AsyncTask;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.app.Dialog;
+import android.widget.CalendarView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.bookingapp.R;
@@ -16,184 +19,139 @@ import com.example.bookingapp.dao.FlightDao;
 import com.example.bookingapp.database.AppDatabase;
 import com.example.bookingapp.entity.Flight;
 
+import java.util.Calendar;
+
 public class AddFlight extends AppCompatActivity {
 
-    private EditText matriculeFlight, flightDate, from, to, seats, departureTime, arrivalTime, pointEscale;
-    private TextView errorMatriculeFlight, errorFlightDate, errorFrom, errorTo, errorSeats, errorDepartureTime, errorArrivalTime;
-    private RadioGroup typeFlightGroup;
-    private RadioButton directFlight, escaleFlight;
-    private Button btnAdd, btnCancel;
+    private EditText matriculeFlight, departureTime, flightDate, from, to, seats, arrivalTime, pointEscale;
+    private EditText selectedFlightDate, selectedDepartureTime, selectedArrivalTime;
+    private Button btnShowTimeDialog, btnShowDialog, btnAdd, btnCancel;
 
     private AppDatabase appDatabase;
     private FlightDao flightDao;
 
+    private void showCalendarDialog() {
+        // Crée un nouveau dialogue
+        Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.activity_dialog_calendar);
+        dialog.setCancelable(true);
 
+        // Récupère les vues du dialogue
+        CalendarView calendarView = dialog.findViewById(R.id.calendarView);
+        Button btnConfirm = dialog.findViewById(R.id.btnConfirm);
+        Button btnCancel = dialog.findViewById(R.id.btnCancel);
+
+        // Variable pour stocker la date sélectionnée
+        String[] selectedDate = {null};
+
+        // Écouteur pour le calendrier
+        calendarView.setOnDateChangeListener((view, year, month, dayOfMonth) -> {
+            selectedDate[0] = year + "-" + (month + 1) + "-" + dayOfMonth;
+        });
+
+        // Bouton "Confirmer"
+        btnConfirm.setOnClickListener(v -> {
+            if (selectedDate[0] != null) {
+                selectedFlightDate.setText(selectedDate[0]);
+            } else {
+                Toast.makeText(this, "Veuillez sélectionner une date", Toast.LENGTH_SHORT).show();
+            }
+            dialog.dismiss();
+        });
+
+        // Bouton "Annuler"
+        btnCancel.setOnClickListener(v -> dialog.dismiss());
+
+        // Affiche le dialogue
+        dialog.show();
+    }
+
+    private void showTimePickerDialog(EditText timeField) {
+        // Utilisation d'un TimePickerDialog natif pour sélectionner l'heure
+        Calendar calendar = Calendar.getInstance();
+        int hour = calendar.get(Calendar.HOUR_OF_DAY);
+        int minute = calendar.get(Calendar.MINUTE);
+
+        TimePickerDialog timePickerDialog = new TimePickerDialog(
+                this,
+                (view, hourOfDay, minute1) -> {
+                    String selectedTime = hourOfDay + ":" + (minute1 < 10 ? "0" + minute1 : minute1);
+                    timeField.setText(selectedTime);
+                },
+                hour, minute, true
+        );
+
+        timePickerDialog.show();
+    }
+
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_flight);
 
-        // Initialiser la base de données
-        appDatabase = AppDatabase.getAppDatabase(this); // Ajoutez cette ligne
+        // Initialisation des champs de texte pour afficher les sélections
+        selectedFlightDate = findViewById(R.id.selectedFlightDate);
+        selectedDepartureTime = findViewById(R.id.selectedDepartureTime);
+        selectedArrivalTime = findViewById(R.id.selectedArrivalTime);
 
-        // Maintenant, vous pouvez accéder à flightDao
+        // Boutons pour ouvrir les dialogues
+        btnShowTimeDialog = findViewById(R.id.btnShowTimeDialog);
+        btnShowTimeDialog.setOnClickListener(v -> showTimePickerDialog(selectedDepartureTime));
+
+        Button btnShowArrivalTimeDialog = findViewById(R.id.arrivalTimeButton);
+        btnShowArrivalTimeDialog.setOnClickListener(v -> showTimePickerDialog(selectedArrivalTime));
+
+        btnShowDialog = findViewById(R.id.btnShowDialog);
+        btnShowDialog.setOnClickListener(v -> showCalendarDialog());
+
+        // Initialiser la base de données
+        appDatabase = AppDatabase.getAppDatabase(this);
         flightDao = appDatabase.flightDao();
 
-        // Initialiser les éléments UI
+        // Initialisation des champs de texte
         matriculeFlight = findViewById(R.id.matriculeFlight);
-        flightDate = findViewById(R.id.flightDate);
         from = findViewById(R.id.from);
         to = findViewById(R.id.to);
         seats = findViewById(R.id.seats);
-        departureTime = findViewById(R.id.departureTime);
-        arrivalTime = findViewById(R.id.arrivalTime);
-        typeFlightGroup = findViewById(R.id.typeFlightGroup);
-        directFlight = findViewById(R.id.directFlight);
-        escaleFlight = findViewById(R.id.escaleFlight);
-        pointEscale = findViewById(R.id.pointEscale);
         btnAdd = findViewById(R.id.btnAdd);
         btnCancel = findViewById(R.id.btnCancel);
 
-        // Initialiser les TextViews pour les messages d'erreur
-        errorMatriculeFlight = findViewById(R.id.errorMatriculeFlight);
-        errorFlightDate = findViewById(R.id.errorFlightDate);
-        errorFrom = findViewById(R.id.errorFrom);
-        errorTo = findViewById(R.id.errorTo);
-        errorSeats = findViewById(R.id.errorSeats);
-        errorDepartureTime = findViewById(R.id.errorDepartureTime);
-        errorArrivalTime = findViewById(R.id.errorArrivalTime);
-        // Afficher ou masquer le champ 'Point Escale' en fonction du type de vol
-        typeFlightGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                if (checkedId == R.id.escaleFlight) {
-                    pointEscale.setVisibility(View.VISIBLE);
-                } else {
-                    pointEscale.setVisibility(View.GONE);
-                }
-            }
-        });
-
         // Action du bouton ajouter
-        btnAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Récupérer les valeurs des champs
-                String matricule = matriculeFlight.getText().toString();
-                String date = flightDate.getText().toString();
-                String fromLocation = from.getText().toString();
-                String toLocation = to.getText().toString();
-                String seatCount = seats.getText().toString();
-                String depTime = departureTime.getText().toString();
-                String arrTime = arrivalTime.getText().toString();
-                String typeFlight = escaleFlight.isChecked() ? "Escale" : "Direct";
-                String escalePoint = pointEscale.getText().toString();
+        btnAdd.setOnClickListener(v -> {
+            String matricule = matriculeFlight.getText().toString();
+            String date = selectedFlightDate.getText().toString();
+            String fromLocation = from.getText().toString();
+            String toLocation = to.getText().toString();
+            String seatCount = seats.getText().toString();
+            String depTime = selectedDepartureTime.getText().toString();
+            String arrTime = selectedArrivalTime.getText().toString();
 
-                boolean isValid = true;
-                // Vérification simple des champs
-                if (matricule.isEmpty()) {
-                    errorMatriculeFlight.setText("Matricule is required.");
-                    errorMatriculeFlight.setVisibility(View.VISIBLE); // Affiche le message d'erreur
-                    isValid = false;
-                } else {
-                    errorMatriculeFlight.setVisibility(View.GONE); // Masque le message d'erreur si valide
-                }
-                if (date.isEmpty()) {
-                    errorFlightDate.setText("Flight date is required.");
-                    errorFlightDate.setVisibility(View.VISIBLE);
-                    isValid = false;
-                } else {
-                    errorFlightDate.setVisibility(View.GONE);
-                }
-                if (fromLocation.isEmpty()) {
-                    errorFrom.setText("Departure location is required.");
-                    errorFrom.setVisibility(View.VISIBLE);
-                    isValid = false;
-                } else {
-                    errorFrom.setVisibility(View.GONE);
-                }
-                if (toLocation.isEmpty()) {
-                    errorTo.setText("Destination location is required.");
-                    errorTo.setVisibility(View.VISIBLE);
-                    isValid = false;
-                } else {
-                    errorTo.setVisibility(View.GONE);
-                }
-                if (seatCount.isEmpty()) {
-                    errorSeats.setText("Number of seats is required.");
-                    errorSeats.setVisibility(View.VISIBLE);
-                    isValid = false;
-                } else {
-                    try {
-                        int seatsValue = Integer.parseInt(seatCount);
-                        if (seatsValue <= 0) {
-                            errorSeats.setText("Seats must be greater than 0.");
-                            errorSeats.setVisibility(View.VISIBLE);
-                            isValid = false;
-                        } else {
-                            errorSeats.setVisibility(View.GONE);
-                        }
-                    } catch (NumberFormatException e) {
-                        errorSeats.setText("Invalid number of seats.");
-                        errorSeats.setVisibility(View.VISIBLE);
-                        isValid = false;
-                    }
-                }
-                if (depTime.isEmpty()) {
-                    errorDepartureTime.setText("Departure time is required.");
-                    errorDepartureTime.setVisibility(View.VISIBLE);
-                    isValid = false;
-                } else {
-                    errorDepartureTime.setVisibility(View.GONE);
-                }
-                if (arrTime.isEmpty()) {
-                    errorArrivalTime.setText("Arrival time is required.");
-                    errorArrivalTime.setVisibility(View.VISIBLE);
-                    isValid = false;
-                } else {
-                    errorArrivalTime.setVisibility(View.GONE);
-                }
-                if (isValid) {
-                // Si tout est valide, ajouter le vol
-                    // Créer un objet Flight
-                    Flight newFlight = new Flight();
-                    newFlight.setFlightMatricule(matricule);
-                    newFlight.setFlightDate(date);
-                    newFlight.setAvailability(true);
-                    newFlight.setNbSeats(Integer.parseInt(seatCount));
-                    newFlight.setFrom(fromLocation);
-                    newFlight.setTo(toLocation);
-                    newFlight.setArrivalTime(arrTime);
-                    newFlight.setDepartureTime(depTime);
-                    newFlight.setType(typeFlight);
-                    // Ajouter le vol dans la base de données Room
-                    new AddFlightAsyncTask(flightDao).execute(newFlight);
-                }else{
-                    Toast.makeText(AddFlight.this, "There is something went wrong", Toast.LENGTH_SHORT).show();
+            boolean isValid = true;
 
-                }
+            if (matricule.isEmpty() || date.isEmpty() || fromLocation.isEmpty() || toLocation.isEmpty() || seatCount.isEmpty() || depTime.isEmpty() || arrTime.isEmpty()) {
+                Toast.makeText(AddFlight.this, "Veuillez remplir tous les champs avant de soumettre", Toast.LENGTH_SHORT).show();
+                isValid = false;
+            }
+
+            if (isValid) {
+                Flight newFlight = new Flight();
+                newFlight.setFlightMatricule(matricule);
+                newFlight.setFlightDate(date);
+                newFlight.setAvailability(true);
+                newFlight.setNbSeats(Integer.parseInt(seatCount));
+                newFlight.setFrom(fromLocation);
+                newFlight.setTo(toLocation);
+                newFlight.setArrivalTime(arrTime);
+                newFlight.setDepartureTime(depTime);
+
+                new AddFlightAsyncTask(flightDao).execute(newFlight);
             }
         });
 
         // Action du bouton annuler
-        btnCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish(); // Ferme l'activité
-            }
-        });
+        btnCancel.setOnClickListener(v -> finish());
     }
-
-    private void resetErrorMessages() {
-        errorMatriculeFlight.setText("");
-        errorFlightDate.setText("");
-        errorFrom.setText("");
-        errorTo.setText("");
-        errorSeats.setText("");
-        errorDepartureTime.setText("");
-        errorArrivalTime.setText("");
-    }
-
 
     private class AddFlightAsyncTask extends AsyncTask<Flight, Void, Void> {
         private FlightDao flightDao;

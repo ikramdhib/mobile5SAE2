@@ -3,73 +3,188 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/gradient_background"
     android:padding="16dp">
 
-    <TextView
-        android:id="@+id/matriculeFlightTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="22sp"
-        android:textStyle="bold" />
+    <!-- Top Image -->
+<ImageView
+android:id="@+id/flightImageView"
+android:layout_width="match_parent"
+android:layout_height="300dp"
+android:scaleType="centerCrop"
+android:src="@drawable/flightdetails"
+    android:layout_marginBottom="16dp"
+    android:background="@drawable/rounded_image" />
 
-    <TextView
-        android:id="@+id/fromTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="18sp" />
+    <!-- Location and Rating section -->
+<LinearLayout
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:orientation="horizontal"
+android:gravity="center_vertical"
+android:layout_marginBottom="12dp">
 
-    <TextView
-        android:id="@+id/toTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="18sp" />
+<TextView
+    android:id="@+id/locationTextView"
+    android:layout_width="0dp"
+    android:layout_weight="1"
+    android:layout_height="wrap_content"
+    android:text="Toronto, Canada"
+    android:textSize="20sp"
+    android:textColor="@android:color/white"
+    android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/dateTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="18sp" />
-
-    <TextView
-        android:id="@+id/seatsTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="18sp" />
-
-    <TextView
-        android:id="@+id/departureTimeTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="18sp" />
-
-    <TextView
-        android:id="@+id/arrivalTimeTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="18sp" />
-
-    <TextView
-        android:id="@+id/typeFlightTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="18sp" />
-
-    <TextView
-        android:id="@+id/pointEscaleTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="18sp" />
-
-    <!-- Ajouter les boutons de modification et de suppression -->
-    <Button
-        android:id="@+id/editButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Modifier" />
-
-    <Button
-        android:id="@+id/deleteButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Supprimer" />
+<TextView
+    android:id="@+id/ratingTextView"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="★ 4.5"
+    android:textSize="18sp"
+    android:textColor="@android:color/white" />
 </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/rounded_background_detail"
+        >
+    <LinearLayout
+        android:layout_width="165dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@drawable/rounded_background"
+        android:padding="12dp"
+        android:layout_margin="10dp"
+        android:layout_marginBottom="16dp">
+
+        <TextView
+            android:id="@+id/fromTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="From: Tunisia"
+            android:textSize="16sp"
+            android:textColor="@android:color/black" />
+
+        <TextView
+            android:id="@+id/toTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="To: Canada"
+            android:textSize="16sp"
+            android:textColor="@android:color/black"
+            android:layout_marginTop="4dp" />
+
+        <TextView
+            android:id="@+id/departureTimeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="At: 2 PM"
+            android:textSize="16sp"
+            android:textColor="@android:color/black"
+            android:layout_marginTop="4dp" />
+
+        <TextView
+            android:id="@+id/arrivalTimeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Duration: 10 Hours"
+            android:textSize="16sp"
+            android:textColor="@android:color/black"
+            android:layout_marginTop="4dp" />
+
+        <TextView
+            android:id="@+id/companyTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Company: Tunisair"
+            android:textSize="16sp"
+            android:textColor="@android:color/black"
+            android:layout_marginTop="4dp" />
+    </LinearLayout>
+    <!-- Flight Details Card -->
+
+    <!-- Buttons Section -->
+
+    <LinearLayout
+        android:layout_width="165dp"
+        android:layout_margin="10dp"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/rounded_background"
+        android:orientation="vertical"
+        android:padding="12dp">
+
+        <TextView
+            android:id="@+id/dateTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="From: Tunisia"
+            android:textColor="@android:color/black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/typeFlightTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="To: Canada"
+            android:textColor="@android:color/black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/seatsTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="At: 2 PM"
+            android:textColor="@android:color/black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/arrivalTimeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Duration: 10 Hours"
+            android:textColor="@android:color/black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/matriculeFlightTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Company: Tunisair"
+            android:textColor="@android:color/black"
+            android:textSize="16sp" />
+    </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:orientation="horizontal"
+android:gravity="center_horizontal">
+
+<Button
+    android:id="@+id/editButton"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    android:text="Modifier"
+    android:backgroundTint="@color/button_background"
+    android:textColor="@android:color/white"
+    android:layout_marginEnd="8dp" />
+
+<Button
+    android:id="@+id/deleteButton"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    android:text="Supprimer"
+    android:backgroundTint="@color/button_background"
+    android:textColor="@android:color/white"
+    android:layout_marginStart="8dp" />
+</LinearLayout>
+    </LinearLayout>

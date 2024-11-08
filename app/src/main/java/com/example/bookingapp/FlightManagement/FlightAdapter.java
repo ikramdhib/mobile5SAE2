@@ -15,7 +15,7 @@ import java.util.List;
 
 public class FlightAdapter extends ArrayAdapter<Flight> {
     private final Context context;
-    private final List<Flight> flights;
+    private List<Flight> flights;
 
     public FlightAdapter(Context context, List<Flight> flights) {
         super(context, R.layout.flight_item, flights);
@@ -25,6 +25,10 @@ public class FlightAdapter extends ArrayAdapter<Flight> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        if (flights == null || flights.isEmpty() || position < 0 || position >= flights.size()) {
+            // Optionally, return a default empty view or handle the error appropriately
+            return new View(context);  // You can customize this part as needed
+        }
         Flight flight = flights.get(position);
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -43,13 +47,16 @@ public class FlightAdapter extends ArrayAdapter<Flight> {
         dateTextView.setText(flight.getFlightDate());
         seatsTextView.setText(String.valueOf(flight.getNbSeats()));
 
-        // Ajout d'un OnClickListener pour chaque élément
         convertView.setOnClickListener(v -> {
             Intent intent = new Intent(context, FlightDetail.class);
             intent.putExtra("flight", flight); // Passer l'objet Flight à la nouvelle activité
             context.startActivity(intent);
         });
 
+
         return convertView;
+    }
+    public void setFlights(List<Flight> flights) {
+        this.flights = flights;
     }
 }
