@@ -3,6 +3,7 @@ package com.example.bookingapp.FlightManagement;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -61,12 +62,14 @@ public class FlightDetail extends AppCompatActivity {
             depTimeTextView.setText(flight.getDepartureTime());
             arrTimeTextView.setText(flight.getArrivalTime());
             typeTextView.setText(flight.getType());
+            Log.d("MyActivity", "User name is: " + flight.getId());
           //  escalePointTextView.setText(flight.getType().equals("Escale") ? flight.getEscalePoint() : "N/A");
         }
 
         // Gestion du clic sur le bouton de modification
         editButton.setOnClickListener(v -> {
             Intent intent = new Intent(this, UpdateFlight.class);
+            intent.putExtra("flightId",flight.getId());
             intent.putExtra("matriculeFlight", flight.getFlightMatricule());
             intent.putExtra("flightDate", flight.getFlightDate());
             intent.putExtra("from", flight.getFrom());

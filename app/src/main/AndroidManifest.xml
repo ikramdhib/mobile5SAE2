@@ -12,7 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BookingApp"
         tools:targetApi="31">
-
+        <activity
+            android:name=".FlightManagement.SortedFilightList"
+            android:exported="false" />
         <activity
             android:name=".FlightManagement.UpdateFlight"
             android:exported="false" />
@@ -23,7 +25,7 @@
             android:name=".FlightManagement.FlightAdapter"
             android:exported="false" />
         <activity
-            android:name=".FlightManagement.FlightList"
+            android:name=".FlightManagement.FindFlightActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

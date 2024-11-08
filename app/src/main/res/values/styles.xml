@@ -1,0 +1,8 @@
+<!-- res/values/styles.xml -->
+<resources>
+    <style name="CircularImageStyle" parent="Widget.MaterialComponents.ShapeableImageView">
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearance.MaterialComponents.SmallComponent</item>
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+</resources>

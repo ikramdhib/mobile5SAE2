@@ -3,9 +3,9 @@ package com.example.bookingapp.FlightManagement;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CalendarView;
@@ -22,16 +22,92 @@ import com.example.bookingapp.database.AppDatabase;
 import com.example.bookingapp.entity.Flight;
 
 import java.util.Calendar;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class UpdateFlight extends AppCompatActivity {
 
     private EditText matriculeFlight, selectedFlightDate, from, to, seats, selectedDepartureTime, selectedArrivalTime, pointEscale;
-    private RadioGroup typeFlightGroup;
-    private Button arrivalTimeButton,btnShowTimeDialog,btnShowDialog, btnAdd, btnCancel;
+    private Button arrivalTimeButton, btnShowTimeDialog, btnShowDialog, btnAdd, btnCancel;
     private AppDatabase database;
     private FlightDao flightDao;
+    private int id;
 
+    private ExecutorService executor = Executors.newSingleThreadExecutor();
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_update_flight);
+
+        // Initialisation de la base de données et du DAO
+        database = AppDatabase.getAppDatabase(this);  // Assurez-vous que votre base de données est correctement initialisée
+        flightDao = database.flightDao();  // Initialisation du DAO
+
+        // Boutons pour ouvrir les dialogues
+        btnShowTimeDialog = findViewById(R.id.btnShowTimeDialog);
+        btnShowTimeDialog.setOnClickListener(v -> showTimePickerDialog(selectedDepartureTime));
+
+        arrivalTimeButton = findViewById(R.id.arrivalTimeButton);
+        arrivalTimeButton.setOnClickListener(v -> showTimePickerDialog(selectedArrivalTime));
+
+        btnShowDialog = findViewById(R.id.btnShowDialog);
+        btnShowDialog.setOnClickListener(v -> showCalendarDialog());
+
+        // Liaison des vues avec les éléments UI
+        matriculeFlight = findViewById(R.id.matriculeFlight);
+        selectedFlightDate = findViewById(R.id.selectedFlightDate);
+        from = findViewById(R.id.from);
+        to = findViewById(R.id.to);
+        seats = findViewById(R.id.seats);
+        selectedDepartureTime = findViewById(R.id.selectedDepartureTime);
+        selectedArrivalTime = findViewById(R.id.selectedArrivalTime);
+        btnAdd = findViewById(R.id.btnAdd);
+        btnCancel = findViewById(R.id.btnCancel);
+
+        // Récupération des données du vol via Intent
+        Intent intent = getIntent();
+        id = intent.getIntExtra("flightId", -1);
+        matriculeFlight.setText(intent.getStringExtra("matriculeFlight"));
+        selectedFlightDate.setText(intent.getStringExtra("flightDate"));
+        from.setText(intent.getStringExtra("from"));
+        to.setText(intent.getStringExtra("to"));
+        seats.setText(intent.getStringExtra("seats"));
+        selectedDepartureTime.setText(intent.getStringExtra("departureTime"));
+        selectedArrivalTime.setText(intent.getStringExtra("arrivalTime"));
+
+        // Gestion du clic sur le bouton Ajouter
+        btnAdd.setOnClickListener(v -> {
+            if (validateInputs()) {
+                // Récupérer les valeurs modifiées
+                String updatedMatricule = matriculeFlight.getText().toString();
+                String updatedFlightDate = selectedFlightDate.getText().toString();
+                String updatedFrom = from.getText().toString();
+                String updatedTo = to.getText().toString();
+                String updatedSeats = seats.getText().toString();
+                String updatedDepartureTime = selectedDepartureTime.getText().toString();
+                String updatedArrivalTime = selectedArrivalTime.getText().toString();
+                Log.d("MyActivity", "User name is: " + id);
+
+                // Mise à jour du vol dans la base de données
+                Flight updatedFlight = new Flight();
+                updatedFlight.setId(id);
+                updatedFlight.setFlightMatricule(updatedMatricule);
+                updatedFlight.setFlightDate(updatedFlightDate);
+                updatedFlight.setNbSeats(Integer.parseInt(updatedSeats));
+                updatedFlight.setTo(updatedTo);
+                updatedFlight.setFrom(updatedFrom);
+                updatedFlight.setDepartureTime(updatedDepartureTime);
+                updatedFlight.setArrivalTime(updatedArrivalTime);
+
+                // Mise à jour dans la base de données en utilisant ExecutorService
+                updateFlightInDatabase(updatedFlight);
+            }
+        });
+
+        // Gestion du clic sur le bouton Annuler
+        btnCancel.setOnClickListener(v -> finish());
+    }
 
     private void showCalendarDialog() {
         // Crée un nouveau dialogue
@@ -68,6 +144,7 @@ public class UpdateFlight extends AppCompatActivity {
         // Affiche le dialogue
         dialog.show();
     }
+
     private void showTimePickerDialog(EditText timeField) {
         // Utilisation d'un TimePickerDialog natif pour sélectionner l'heure
         Calendar calendar = Calendar.getInstance();
@@ -86,103 +163,16 @@ public class UpdateFlight extends AppCompatActivity {
         timePickerDialog.show();
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_update_flight);
-
-        // Boutons pour ouvrir les dialogues
-        btnShowTimeDialog = findViewById(R.id.btnShowTimeDialog);
-        btnShowTimeDialog.setOnClickListener(v -> showTimePickerDialog(selectedDepartureTime));
-
-        Button btnShowArrivalTimeDialog = findViewById(R.id.arrivalTimeButton);
-        btnShowArrivalTimeDialog.setOnClickListener(v -> showTimePickerDialog(selectedArrivalTime));
-
-        btnShowDialog = findViewById(R.id.btnShowDialog);
-        btnShowDialog.setOnClickListener(v -> showCalendarDialog());
-
-        // Liaison des vues avec les éléments UI
-        matriculeFlight = findViewById(R.id.matriculeFlight);
-        selectedFlightDate = findViewById(R.id.selectedFlightDate);
-        from = findViewById(R.id.from);
-        to = findViewById(R.id.to);
-        seats = findViewById(R.id.seats);
-        selectedDepartureTime = findViewById(R.id.selectedDepartureTime);
-        selectedArrivalTime = findViewById(R.id.selectedArrivalTime);
-        btnAdd = findViewById(R.id.btnAdd);
-        btnCancel = findViewById(R.id.btnCancel);
-
-        // Récupération des données du vol via Intent
-        Intent intent = getIntent();
-        matriculeFlight.setText(intent.getStringExtra("matriculeFlight"));
-        selectedFlightDate.setText(intent.getStringExtra("flightDate"));
-        from.setText(intent.getStringExtra("from"));
-        to.setText(intent.getStringExtra("to"));
-        seats.setText(intent.getStringExtra("seats"));
-        selectedDepartureTime.setText(intent.getStringExtra("departureTime"));
-        selectedArrivalTime.setText(intent.getStringExtra("arrivalTime"));
-
-
-        // Gestion du clic sur le bouton Ajouter
-        btnAdd.setOnClickListener(v -> {
-            if (validateInputs()) {
-                // Récupérer les valeurs modifiées
-                String updatedMatricule = matriculeFlight.getText().toString();
-                String updatedFlightDate = selectedFlightDate.getText().toString();
-                String updatedFrom = from.getText().toString();
-                String updatedTo = to.getText().toString();
-                String updatedSeats = seats.getText().toString();
-                String updatedDepartureTime = selectedDepartureTime.getText().toString();
-                String updatedArrivalTime = selectedArrivalTime.getText().toString();
-
-                // Mise à jour du vol dans la base de données
-                Flight updatedFlight = new Flight();
-                updatedFlight.setFlightMatricule(updatedMatricule);
-                updatedFlight.setFlightDate(updatedFlightDate);
-                updatedFlight.setNbSeats(Integer.parseInt(updatedSeats));
-                updatedFlight.setTo(updatedTo);
-                updatedFlight.setFrom(updatedFrom);
-                updatedFlight.setDepartureTime(updatedDepartureTime);
-                updatedFlight.setArrivalTime(updatedArrivalTime);
-
-                // Exécution de la mise à jour du vol dans la base de données via AsyncTask
-                new UpdateFlightTask(flightDao, updatedFlight).execute();
-            }
-        });
-
-        // Gestion du clic sur le bouton Annuler
-        btnCancel.setOnClickListener(v -> finish());
-    }
-
-
-    private class UpdateFlightTask extends AsyncTask<Void, Void, Void> {
-        private FlightDao flightDao;
-        private Flight updatedFlight;
-
-        public UpdateFlightTask(FlightDao flightDao, Flight updatedFlight) {
-            this.flightDao = flightDao;
-            this.updatedFlight = updatedFlight;
-        }
-
-        @Override
-        protected Void doInBackground(Void... voids) {
-            flightDao.updateFlight(updatedFlight); // Mise à jour du vol dans la base de données
-            return null;
-        }
-    }
-
-    // Validation des champs
     private boolean validateInputs() {
         boolean isValid = true;
         if (TextUtils.isEmpty(matriculeFlight.getText())) {
-           // showError(R.id.errorMatriculeFlight, "Matricule est requis");
+            runOnUiThread(() -> Toast.makeText(UpdateFlight.this, "des champs vides !!", Toast.LENGTH_SHORT).show());
+
             isValid = false;
         } else {
-          //  hideError(R.id.errorMatriculeFlight);
+            runOnUiThread(() -> Toast.makeText(UpdateFlight.this, "des champs vides !!", Toast.LENGTH_SHORT).show());
+
         }
-
-        // Ajoutez des validations similaires pour les autres champs
-
         return isValid;
     }
 
@@ -198,5 +188,17 @@ public class UpdateFlight extends AppCompatActivity {
         TextView errorView = findViewById(errorViewId);
         errorView.setVisibility(View.GONE);
     }
-}
 
+    // Méthode pour effectuer la mise à jour dans la base de données
+    private void updateFlightInDatabase(Flight updatedFlight) {
+        executor.execute(() -> {
+            try {
+                flightDao.updateFlight(updatedFlight);
+                runOnUiThread(() -> Toast.makeText(UpdateFlight.this, "Vol mis à jour avec succès", Toast.LENGTH_SHORT).show());
+            } catch (Exception e) {
+                e.printStackTrace();
+                runOnUiThread(() -> Toast.makeText(UpdateFlight.this, "Échec de la mise à jour du vol", Toast.LENGTH_SHORT).show());
+            }
+        });
+    }
+}

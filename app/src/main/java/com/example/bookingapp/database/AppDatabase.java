@@ -31,6 +31,8 @@ import com.example.bookingapp.entity.Response;
 import com.example.bookingapp.entity.Transport;
 import com.example.bookingapp.entity.User;
 
+import java.util.List;
+
 @Database(entities = {User.class , Hotel.class , Transport.class,
 Flight.class , Discusion.class , Response.class, Chambre.class , Categorie.class,
 ReservationHotel.class, ReservationTransport.class, ReservationFlight.class,
@@ -66,6 +68,5 @@ public abstract class AppDatabase extends RoomDatabase {
         }
         return instance;
     }
-
 
 }

@@ -40,7 +40,8 @@ public interface FlightDao {
     @Query("SELECT * FROM flights WHERE id = :flightId")
     Flight getFlightById(int flightId);
 
-    // Récupération de vols par la destination "from" et "to"
-    @Query("SELECT * FROM flights WHERE `from` = :fromLocation AND `to` = :toLocation")
-    List<Flight> getFlightsByRoute(String fromLocation, String toLocation);
+
+
+    @Query("SELECT * FROM Flights WHERE `from` LIKE :from AND `to` LIKE :to AND flightDate LIKE :flightDate")
+    List<Flight> searchFlights(String from, String to, String flightDate);
 }
