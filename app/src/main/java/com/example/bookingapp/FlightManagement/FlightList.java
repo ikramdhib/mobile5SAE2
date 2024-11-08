@@ -2,6 +2,7 @@ package com.example.bookingapp.FlightManagement;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.ListView;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -34,7 +35,12 @@ public class FlightList extends AppCompatActivity {
 
         flightListView = findViewById(R.id.flightListView);
         flightDao = AppDatabase.getAppDatabase(this).flightDao();
-
+        Button btnAddFlight = findViewById(R.id.btnAddFlight);
+        btnAddFlight.setOnClickListener(v -> {
+            // Lancer l'activité "Ajouter un vol"
+            Intent intent = new Intent(FlightList.this, AddFlight.class);  // Remplacez par le nom correct de votre activité
+            startActivity(intent);
+        });
         // Récupérer la liste des vols dans un thread séparé
         new Thread(new Runnable() {
             @Override

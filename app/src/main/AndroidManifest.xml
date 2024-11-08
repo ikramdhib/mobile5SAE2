@@ -27,9 +27,7 @@
         <activity
             android:name=".FlightManagement.BookFlight"
             android:exported="false" />
-        <activity
-            android:name=".FlightManagement.FlightList"
-            android:exported="false" />
+
         <activity
             android:name=".FlightManagement.AddFlight"
             android:exported="false" />
@@ -37,7 +35,7 @@
             android:name=".FlightManagement.FindFlightActivity"
             android:exported="false" />
         <activity
-            android:name=".FlightManagement.ReservationHistory"
+            android:name=".FlightManagement.FlightList"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

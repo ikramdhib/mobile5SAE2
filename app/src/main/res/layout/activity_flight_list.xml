@@ -19,7 +19,17 @@
     <ListView
         android:id="@+id/flightListView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:divider="@android:color/transparent"
-        android:dividerHeight="16dp" />
+        android:dividerHeight="16dp"
+        android:layout_weight="1" />
+
+    <!-- Bouton Ajouter un vol -->
+    <Button
+        android:id="@+id/btnAddFlight"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@color/button_background"
+        android:text="Add new Flight" />
 </LinearLayout>
