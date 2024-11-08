@@ -25,7 +25,10 @@
             android:name=".FlightManagement.FlightAdapter"
             android:exported="false" />
         <activity
-            android:name=".FlightManagement.FindFlightActivity"
+            android:name=".FlightManagement.BookFlight"
+            android:exported="false" />
+        <activity
+            android:name=".FlightManagement.ReservationHistory"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

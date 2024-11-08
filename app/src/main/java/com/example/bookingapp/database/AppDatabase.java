@@ -5,6 +5,7 @@ import android.content.Context;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.bookingapp.dao.CategorieDao;
 import com.example.bookingapp.dao.ChambreDao;
@@ -31,12 +32,10 @@ import com.example.bookingapp.entity.Response;
 import com.example.bookingapp.entity.Transport;
 import com.example.bookingapp.entity.User;
 
-import java.util.List;
-
 @Database(entities = {User.class , Hotel.class , Transport.class,
-Flight.class , Discusion.class , Response.class, Chambre.class , Categorie.class,
-ReservationHotel.class, ReservationTransport.class, ReservationFlight.class,
-Bus.class, Car.class}, version = 1, exportSchema = false)
+        Flight.class , Discusion.class , Response.class, Chambre.class , Categorie.class,
+        ReservationHotel.class, ReservationTransport.class, ReservationFlight.class,
+        Bus.class, Car.class}, version = 1, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
     private static AppDatabase instance;
@@ -45,28 +44,43 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract UserDao userDao();
     public abstract TransportDao transportDao();
     public abstract HotelDao hotelDao();
-    public abstract DiscussionDao discussionDao();
-    public abstract FlightDao flightDao();
+    public abstract DiscussionDao discussionDao5();
     public abstract ResponseDao responseDao();
+    public abstract FlightDao flightDao();
     public abstract CategorieDao categorieDao();
     public abstract ChambreDao chambreDao();
     public abstract ReservationFlightDao reservationFlightDao();
     public abstract ReservationTransportDao reservationTransportDao();
     public abstract ReservationHotelDao reservationHotelDao();
 
-    // Singleton pattern for database instance
-    public static AppDatabase getAppDatabase(final Context context) {
+    public static AppDatabase getAppDatabase(Context context) {
         if (instance == null) {
-            synchronized (AppDatabase.class) {
-                if (instance == null) {
-                    instance = Room.databaseBuilder(context.getApplicationContext(),
-                                    AppDatabase.class, "booking_table")
-                            .fallbackToDestructiveMigration()
-                            .build();// Removed allowMainThreadQueries for better performance
-                }
-            }
+            instance = Room.databaseBuilder(context.getApplicationContext(), AppDatabase.class, "booking_table")
+                    .allowMainThreadQueries()
+                    .addCallback(new RoomDatabase.Callback() {
+                        @Override
+                        public void onOpen(SupportSQLiteDatabase db) {
+                            super.onOpen(db);
+                            // Désactiver les contraintes de clé étrangère
+                            db.execSQL("PRAGMA foreign_keys = OFF;");
+                        }
+                    })
+                    .build();
         }
         return instance;
     }
+
+    // Méthode pour réactiver les contraintes de clé étrangère
+    public static void enableForeignKeyConstraints(Context context) {
+        SupportSQLiteDatabase db = getAppDatabase(context).getOpenHelper().getWritableDatabase();
+        db.execSQL("PRAGMA foreign_keys = ON;");
+    }
+
+    // Méthode pour désactiver les contraintes de clé étrangère (par exemple pour les tests)
+    public static void disableForeignKeyConstraints(Context context) {
+        SupportSQLiteDatabase db = getAppDatabase(context).getOpenHelper().getWritableDatabase();
+        db.execSQL("PRAGMA foreign_keys = OFF;");
+    }
+
 
 }

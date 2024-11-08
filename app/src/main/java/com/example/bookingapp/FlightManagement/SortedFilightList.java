@@ -1,5 +1,6 @@
 package com.example.bookingapp.FlightManagement;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -7,20 +8,14 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.example.bookingapp.R;
 import com.example.bookingapp.dao.FlightDao;
 import com.example.bookingapp.database.AppDatabase;
 import com.example.bookingapp.entity.Flight;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class SortedFilightList extends AppCompatActivity {
@@ -89,8 +84,20 @@ public class SortedFilightList extends AppCompatActivity {
 
             // Set up the "Book Now" button click listener
             btnBookNow.setOnClickListener(v -> {
-                // Handle booking logic here, e.g., start a new activity or show a confirmation dialog
-                Toast.makeText(this, "Booking " + flight.getFlightMatricule(), Toast.LENGTH_SHORT).show();
+                // Créer un Intent pour rediriger vers l'activité de réservation
+                Intent intent = new Intent(SortedFilightList.this, BookFlight.class);
+
+                // Passer les détails du vol via l'Intent
+                intent.putExtra("flightMatricule", flight.getFlightMatricule());
+                intent.putExtra("flightId", flight.getId());
+                intent.putExtra("flightDate", flight.getFlightDate());
+                intent.putExtra("departureTime", flight.getDepartureTime()); // Assurez-vous que ces méthodes existent
+                intent.putExtra("arrivalTime", flight.getArrivalTime()); // Assurez-vous que ces méthodes existent
+                intent.putExtra("nbSeats", flight.getNbSeats()); // Si vous voulez aussi passer le nombre de sièges disponibles
+                intent.putExtra("pricePerPassenger", 100.00); // Vous pouvez aussi ajuster ce prix selon votre logique
+
+                // Démarrer l'activité de réservation
+                startActivity(intent);
             });
 
             // Add the populated item view to the flight list layout

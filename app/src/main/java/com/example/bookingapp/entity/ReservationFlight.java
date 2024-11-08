@@ -1,11 +1,14 @@
 package com.example.bookingapp.entity;
 
+import android.widget.TextView;
+
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
-import java.util.Date;
+import java.io.Serializable;
+
 @Entity(
         foreignKeys = {@ForeignKey(
                 entity = Flight.class,
@@ -21,7 +24,7 @@ import java.util.Date;
         }
 
 )
-public class ReservationFlight {
+public class ReservationFlight implements Serializable {
     @PrimaryKey(autoGenerate = true)
     private int id ;
     @ColumnInfo

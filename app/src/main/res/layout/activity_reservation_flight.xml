@@ -1,0 +1,161 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@drawable/gradient_background">
+
+    <!-- Top Image Banner -->
+    <ImageView
+        android:id="@+id/topImageBanner"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/flighnight"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Flight Details Header -->
+    <TextView
+        android:id="@+id/flightDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Flight Details"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Flight Information Section -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:background="@drawable/rounded_background"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/flightDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Date: "
+            android:textSize="16sp"
+            android:layout_marginBottom="4dp" />
+
+        <TextView
+            android:id="@+id/flightDepartureTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Departure Time: "
+            android:textSize="16sp"
+            android:layout_marginBottom="4dp" />
+
+        <TextView
+            android:id="@+id/flightArrivalTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Arrival Time: "
+            android:textSize="16sp"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Passenger Count Section -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Passengers"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp" />
+
+        <!-- Passenger Count Controls -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <!-- Decrement Button -->
+            <Button
+                android:id="@+id/btnDecreasePassengers"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:text="-"
+                android:textSize="200sp"
+                android:padding="8dp"
+                android:backgroundTint="@color/gradient_end"
+                android:textColor="@android:color/white"/>
+
+
+
+            <!-- Passenger Count Display -->
+            <TextView
+                android:id="@+id/passengerCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:text="1"
+                android:textSize="18sp" />
+
+            <!-- Increment Button -->
+            <Button
+                android:id="@+id/btnIncreasePassengers"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:text="+"
+                android:textSize="24sp"
+                android:padding="8dp"
+                android:backgroundTint="@color/gradient_end"
+                android:textColor="@android:color/white"/>
+        </LinearLayout>
+
+        <!-- Total Price Section -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Total Price"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:id="@+id/totalPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="$0.00"
+            android:textSize="16sp"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Booking Button Section -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal">
+
+            <!-- Final Book Button -->
+            <Button
+                android:id="@+id/btnFinalBook"
+                android:layout_width="149dp"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/button_background"
+                android:text="Final Book"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                android:layout_marginEnd="10dp" />
+
+            <!-- Cancel Button -->
+            <Button
+                android:id="@+id/btnAnnuler"
+                android:layout_width="158dp"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/button_background"
+                android:text="Cancel"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                android:layout_marginStart="10dp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
