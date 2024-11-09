@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Menu item for Car Management -->
+    <item
+        android:id="@+id/nav_car_management"
+        android:title="Car Management" />
+
+    <!-- Menu item for Bus Management -->
+    <item
+        android:id="@+id/nav_bus_management"
+        android:title="Bus Management" />
+
+    <!-- You can add more items here as needed -->
+</menu>

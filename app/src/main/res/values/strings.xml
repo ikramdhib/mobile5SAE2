@@ -1,3 +1,48 @@
 <resources>
     <string name="app_name">BookingApp</string>
+
+    <string-array name="transport_types">
+        <item>Car</item>
+        <item>Bus</item>
+    </string-array>
+
+    <string-array name="transport_statuses">
+        <item>Available</item>
+        <item>Booked</item>
+        <item>Not Available</item>
+        <item>Soon</item>
+    </string-array>
+    <string-array name="car_brands">
+            <item>Ford</item>
+            <item>BMW</item>
+            <item>Mercedes</item>
+            <item>Audi</item>
+            <item>Toyota</item>
+    </string-array>
+
+    <string-array name="car_types">
+            <item>Sedan</item>
+            <item>SUV</item>
+            <item>Hatchback</item>
+            <item>Convertible</item>
+    </string-array>
+
+    <string-array name="availability_status">
+            <item>Available</item>
+            <item>Not Available</item>
+            <item>In Maintenance</item>
+    </string-array>
+    <string-array name="payment_methods_array">
+        <item>Cash</item>
+        <item>Credit Card</item>
+        <item>Mobile Payment</item>
+    </string-array>
+
+    <string-array name="status_array">
+        <item>Available</item>
+        <item>Reserved</item>
+        <item>Unavailable</item>
+    </string-array>
+
+
 </resources>

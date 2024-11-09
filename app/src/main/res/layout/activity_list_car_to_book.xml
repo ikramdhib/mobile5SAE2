@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#4D9BD3"
+    android:padding="16dp">
+
+    <!-- Title TextView -->
+    <TextView
+        android:id="@+id/tvAvailableCars"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Available Cars to ride"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Count TextView -->
+    <TextView
+        android:id="@+id/tvCarsCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvAvailableCars"
+        android:text="18 cars found"
+        android:textSize="14sp"
+        android:textColor="#666" />
+
+    <!-- RecyclerView for Car List -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_below="@id/tvCarsCount"
+        android:layout_above="@+id/btnBackToTransportManagement"
+        android:layout_marginTop="8dp" />
+
+    <!-- Back Button at the Bottom -->
+    <Button
+        android:id="@+id/btnBackToTransportManagement"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Back to Transport Management"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp" />
+
+</RelativeLayout>

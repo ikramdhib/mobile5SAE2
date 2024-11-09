@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/rounded_card_background"
+    android:padding="10dp"
+    android:layout_margin="8dp">
+
+    <ImageView
+        android:id="@+id/carImage"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginEnd="10dp"
+        android:src="@drawable/cars"
+        android:scaleType="centerCrop" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/carTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Car Title"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/carDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Automatic | 3 seats | Octane"
+            android:textSize="14sp"
+            android:textColor="#777"/>
+
+        <TextView
+            android:id="@+id/carDistance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="800m (5mins away)"
+            android:textSize="14sp"
+            android:textColor="#777"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/btnBookLater"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Book Later"
+            android:textColor="#008577"
+            />
+
+        <Button
+            android:id="@+id/btnRideNow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ride Now"
+            android:textColor="#fff"
+            />
+    </LinearLayout>
+
+</LinearLayout>

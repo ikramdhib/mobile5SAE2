@@ -31,14 +31,7 @@ public class Transport {
         this.registrationNumber = registrationNumber;
     }
 
-    public Transport(String type, String brand, double pricePerHour, String availabilityStatus, String registrationNumber) {
-        this.type = type;
-        this.brand = brand;
-        this.pricePerHour = pricePerHour;
-        this.availabilityStatus = availabilityStatus;
-        this.registrationNumber = registrationNumber;
-    }
-
+    // Getters and Setters for all fields
     public int getId() {
         return id;
     }

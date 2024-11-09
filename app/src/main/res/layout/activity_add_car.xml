@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="#4D9BD3"
+    >
+
+    <!-- Car Brand Spinner -->
+    <Spinner
+        android:id="@+id/spinnerBrand"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Car Model -->
+    <Spinner
+        android:id="@+id/spinnerModel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Price per Hour -->
+    <EditText
+        android:id="@+id/editTextPricePerHour"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Price Per Hour"
+        android:inputType="numberDecimal"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Registration Number -->
+    <EditText
+        android:id="@+id/editTextRegistrationNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Registration Number"
+        android:inputType="text"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Car Type Spinner -->
+    <Spinner
+        android:id="@+id/spinnerCarType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Availability Status Spinner -->
+    <Spinner
+        android:id="@+id/spinnerAvailabilityStatus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Number of Seats Picker -->
+    <NumberPicker
+        android:id="@+id/numberPickerSeats"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Save Button -->
+    <Button
+        android:id="@+id/addTransportButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add Car"
+        android:layout_marginTop="16dp" />
+    <Button
+        android:id="@+id/cancelButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cancel"
+        android:layout_marginTop="16dp" />
+
+</LinearLayout>

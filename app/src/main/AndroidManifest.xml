@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -12,8 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BookingApp"
         tools:targetApi="31">
+
         <activity
-            android:name=".MainActivity"
+            android:name=".TransportManagementActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,6 +23,43 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".AddCarActivity"
+            android:exported="true" />
+        <activity
+            android:name=".CarListActivity"
+            android:exported="true" />
+        <activity
+            android:name=".BusListActivity"
+            android:exported="true" />
+        <activity
+            android:name=".AddBusActivity"
+            android:exported="true" />
+        <activity
+            android:name=".BookingListCarsActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ReservationCarActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ThankYouActivity"
+            android:exported="true" />
+        <activity
+            android:name=".BookingListBusesActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ReservationBusActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ReservationListActivity"
+            android:exported="true" />
+        <activity
+            android:name=".EditCarActivity"
+            android:exported="true" />
+        <activity
+            android:name=".EditBusActivity"
+            android:exported="true" />
+
     </application>
 
 </manifest>
