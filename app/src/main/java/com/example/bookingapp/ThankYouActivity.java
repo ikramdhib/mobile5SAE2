@@ -83,8 +83,8 @@ public class ThankYouActivity extends AppCompatActivity {
                 "Payment Method: " + paymentMethod + "\n" +
                 "Status: " + status;
 
-        // Define the file path in a public directory
-        File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), fileName);
+        // Define the file path in the Documents directory
+        File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), fileName);
 
         try (FileOutputStream fos = new FileOutputStream(file)) {
             // Write the content to the file
@@ -99,6 +99,7 @@ public class ThankYouActivity extends AppCompatActivity {
             Toast.makeText(this, "Failed to save reservation details.", Toast.LENGTH_SHORT).show();
         }
     }
+
 
 
 }

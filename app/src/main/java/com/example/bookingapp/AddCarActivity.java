@@ -20,7 +20,7 @@ public class AddCarActivity extends AppCompatActivity {
     private EditText edtModel, edtPrice, edtRegistration;
     private Spinner spinnerBrand, spinnerCarType, spinnerAvailabilityStatus, spinnerModel;
     private NumberPicker numberPickerSeats;
-    private Button btnSave,cancelButton;
+    private Button btnSave, cancelButton;
     private AppDatabase db;
 
     @Override
@@ -164,9 +164,20 @@ public class AddCarActivity extends AppCompatActivity {
         }
 
         String brand = (String) spinnerBrand.getSelectedItem();
+        if (brand == null || brand.isEmpty()) {
+            Toast.makeText(this, "Please select a brand", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         String carType = (String) spinnerCarType.getSelectedItem();
         String availabilityStatus = (String) spinnerAvailabilityStatus.getSelectedItem();
         int numberOfSeats = numberPickerSeats.getValue();
+
+        // Ensure the number of seats is valid
+        if (numberOfSeats < 1 || numberOfSeats > 50) {
+            Toast.makeText(this, "Please select a valid number of seats", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         // Create a Car object
         Car car = new Car(brand, model, price, registration, carType, availabilityStatus, numberOfSeats);

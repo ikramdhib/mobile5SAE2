@@ -21,7 +21,7 @@ public class AddBusActivity extends AppCompatActivity {
     private NumberPicker numberPickerSeats;
     private Spinner spinnerDestination;
     private EditText editTextTicketPrice;
-    private Button btnAddBus,cancelButton;
+    private Button btnAddBus, cancelButton;
     private AppDatabase db;
 
     @Override
@@ -64,28 +64,40 @@ public class AddBusActivity extends AppCompatActivity {
     }
 
     private void addBus() {
-        try {
-            // Get selected number of seats from NumberPicker
-            int nbSeats = numberPickerSeats.getValue();
+        // Get selected number of seats from NumberPicker
+        int nbSeats = numberPickerSeats.getValue();
 
-            // Get selected destination from Spinner
-            String destination = spinnerDestination.getSelectedItem().toString();
+        // Get selected destination from Spinner
+        String destination = spinnerDestination.getSelectedItem().toString();
 
-            // Parse ticket price from EditText
-            double ticketPrice = Double.parseDouble(editTextTicketPrice.getText().toString());
-
-            // Use SimpleDateFormat to get current time
-            SimpleDateFormat sdf = new SimpleDateFormat("HH:mm", Locale.getDefault());
-            String timeString = sdf.format(new Date());
-
-            // Create a new Bus object and insert it into the database
-            Bus newBus = new Bus(nbSeats, destination, ticketPrice, timeString);
-            db.busDao().insert(newBus);
-
-            Toast.makeText(this, "Bus Added", Toast.LENGTH_SHORT).show();
-            finish();
-        } catch (NumberFormatException e) {
-            Toast.makeText(this, "Please fill in all fields correctly", Toast.LENGTH_SHORT).show();
+        // Check if ticket price is entered and is a valid number
+        String ticketPriceStr = editTextTicketPrice.getText().toString().trim();
+        if (ticketPriceStr.isEmpty()) {
+            Toast.makeText(this, "Ticket price cannot be empty", Toast.LENGTH_SHORT).show();
+            return;
         }
+
+        double ticketPrice;
+        try {
+            ticketPrice = Double.parseDouble(ticketPriceStr);
+            if (ticketPrice <= 0) {
+                throw new NumberFormatException("Ticket price must be greater than zero");
+            }
+        } catch (NumberFormatException e) {
+            Toast.makeText(this, "Invalid ticket price. Please enter a valid number.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Use SimpleDateFormat to get current time
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm", Locale.getDefault());
+        String timeString = sdf.format(new Date());
+
+        // Create a new Bus object and insert it into the database
+        Bus newBus = new Bus(nbSeats, destination, ticketPrice, timeString);
+        db.busDao().insert(newBus);
+
+        // Show success message and navigate back
+        Toast.makeText(this, "Bus Added", Toast.LENGTH_SHORT).show();
+        finish();
     }
 }
