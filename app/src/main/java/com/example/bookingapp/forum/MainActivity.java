@@ -1,4 +1,4 @@
-package com.example.bookingapp;
+package com.example.bookingapp.forum;
 
 import android.os.Bundle;
 
@@ -8,6 +8,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.bookingapp.R;
 import com.example.bookingapp.database.AppDatabase;
 
 public class MainActivity extends AppCompatActivity {

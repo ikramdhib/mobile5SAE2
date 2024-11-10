@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ADD8E6"
+    android:padding="16dp">
+
+    <ImageView
+        android:id="@+id/background_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/background_image"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:alpha="0.5"
+        android:scaleType="centerInside" />
+
+    <!-- Titre de la page -->
+    <TextView
+        android:id="@+id/write_comment_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Écrivez votre commentaire"
+        android:textColor="@android:color/white"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp" />
+
+    <!-- Zone de saisie du commentaire -->
+    <EditText
+        android:id="@+id/comment_input"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:layout_below="@id/write_comment_title"
+        android:layout_above="@id/submit_button"
+        android:hint="Écrivez votre commentaire ici..."
+        android:background="@drawable/discussion_background"
+        android:gravity="start"
+        android:minHeight="200dp"
+        android:padding="16dp" />
+
+    <!-- Bouton de soumission -->
+    <Button
+        android:id="@+id/submit_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Soumettre"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="#0077b6"
+        android:textColor="@android:color/white" />
+</RelativeLayout>

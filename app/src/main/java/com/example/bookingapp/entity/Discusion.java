@@ -1,18 +1,14 @@
 package com.example.bookingapp.entity;
 
+import androidx.annotation.Nullable;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity(
         foreignKeys = {@ForeignKey(
-                entity = Categorie.class,
-                parentColumns = "id",
-                childColumns = "categorieId",
-                onDelete = ForeignKey.CASCADE
-        ),
-         @ForeignKey(
                 entity = User.class,
                 parentColumns = "id",
                 childColumns = "creatorId",
@@ -21,94 +17,76 @@ import androidx.room.PrimaryKey;
 )
 public class Discusion {
     @PrimaryKey(autoGenerate = true)
-    private int id ;
+    private int id;
+
     @ColumnInfo
-    private String title ;
+    @Nullable
+    private String title;
+
     @ColumnInfo
     private String content;
-    @ColumnInfo
-    private String createdAt ;
 
-    private int categorieId;
+    @ColumnInfo
+    @Nullable
+    private String createdAt;
+
+    @Nullable
     private int creatorId;
 
+    // Constructor utilisé par Room
+    public Discusion(String title, String content, String createdAt, int creatorId) {
+        this.title = title;
+        this.content = content;
+        this.createdAt = createdAt;
+        this.creatorId = creatorId;
+    }
+
+    // Constructeur par défaut ignoré par Room
+    @Ignore
     public Discusion() {
     }
 
-    public Discusion(String title, String content, String createdAt, int categorieId, int creatorId) {
-        this.title = title;
-        this.content = content;
-        this.createdAt = createdAt;
-        this.categorieId = categorieId;
-        this.creatorId = creatorId;
-    }
-
-    public Discusion(int id, String title, String content, String createdAt, int categorieId, int creatorId) {
-        this.id = id;
-        this.title = title;
-        this.content = content;
-        this.createdAt = createdAt;
-        this.categorieId = categorieId;
-        this.creatorId = creatorId;
-    }
-
+    // Getters et setters
     public int getId() {
         return id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public String getCreatedAt() {
-        return createdAt;
     }
 
     public void setId(int id) {
         this.id = id;
     }
 
-    public void setTitle(String title) {
+    @Nullable
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(@Nullable String title) {
         this.title = title;
+    }
+
+    public String getContent() {
+        return content;
     }
 
     public void setContent(String content) {
         this.content = content;
     }
 
-    public void setCreatedAt(String createdAt) {
+    @Nullable
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(@Nullable String createdAt) {
         this.createdAt = createdAt;
     }
 
-    public int getCategorieId() {
-        return categorieId;
-    }
-
+    @Nullable
     public int getCreatorId() {
         return creatorId;
     }
 
-    public void setCategorieId(int categorieId) {
-        this.categorieId = categorieId;
-    }
-
-    public void setCreatorId(int creatorId) {
+    public void setCreatorId(@Nullable int creatorId) {
         this.creatorId = creatorId;
-    }
-
-    @Override
-    public String toString() {
-        return "Discusion{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", content='" + content + '\'' +
-                ", createdAt=" + createdAt +
-                ", categorieId=" + categorieId +
-                ", creatorId=" + creatorId +
-                '}';
     }
 }

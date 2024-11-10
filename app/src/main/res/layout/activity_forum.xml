@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ADD8E6"
+    android:padding="16dp">
+
+    <!-- ImageView pour l'image en arrière-plan -->
+    <ImageView
+        android:id="@+id/background_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/background_image"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:alpha="0.5"
+        android:scaleType="centerInside" />
+
+    <!-- Titre en haut de la page -->
+    <TextView
+        android:id="@+id/forum_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/forum_title"
+        android:textColor="@android:color/white"
+        android:textSize="35sp"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp" />
+
+    <!-- Barre de recherche (en premier plan par rapport à l'image) -->
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/search_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:queryHint="Rechercher une discussion"
+        android:layout_below="@id/forum_title"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/search_bar_background" />
+
+    <!-- ScrollView contenant la section principale et la liste des discussions -->
+    <ScrollView
+        android:id="@+id/scroll_view_discussions"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_above="@id/btn_view_more"
+        android:layout_below="@id/search_view"
+        android:layout_marginTop="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- RecyclerView pour les discussions -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view_discussions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false" />
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Bouton "Voir Plus" placé en dehors du ScrollView, sous les discussions -->
+    <Button
+        android:id="@+id/btn_view_more"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Voir plus"
+        android:layout_above="@id/btn_add_discussion"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="#0077b6"
+        android:textColor="@android:color/white" />
+
+    <!-- Bouton "Ajouter une discussion" placé au bas de la page -->
+    <Button
+        android:id="@+id/btn_add_discussion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ajouter une discussion"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="#0077b6"
+        android:textColor="@android:color/white" />
+
+</RelativeLayout>

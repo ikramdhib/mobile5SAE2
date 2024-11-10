@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ADD8E6"
+    android:padding="16dp">
+
+    <!-- ImageView pour l'image en arrière-plan -->
+    <ImageView
+        android:id="@+id/background_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/background_image"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:alpha="0.5"
+        android:scaleType="centerInside" />
+
+    <!-- Titre de la discussion -->
+    <TextView
+        android:id="@+id/discussion_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Titre de la discussion"
+        android:textColor="@android:color/white"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp" />
+
+    <!-- Section contenant les boutons de modification et suppression -->
+    <LinearLayout
+        android:id="@+id/button_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/discussion_title"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp">
+
+        <!-- Bouton de mise à jour de la discussion -->
+        <Button
+            android:id="@+id/update_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Modifier"
+            android:backgroundTint="#0077b6"
+            android:textColor="@android:color/white"
+            android:layout_marginEnd="8dp" />
+
+        <!-- Bouton de suppression de la discussion -->
+        <Button
+            android:id="@+id/delete_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Supprimer"
+            android:backgroundTint="#ff0000"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
+
+    <!-- Champ d'édition du titre de la discussion -->
+    <EditText
+        android:id="@+id/edit_discussion_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/button_container"
+        android:layout_marginTop="16dp"
+        android:hint="Modifier le titre de la discussion"
+        android:visibility="gone"
+        android:background="@android:color/white"
+        android:padding="8dp"
+        android:textSize="16sp" />
+
+    <!-- Champ d'édition du contenu de la discussion -->
+    <EditText
+        android:id="@+id/edit_discussion_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edit_discussion_title"
+        android:layout_marginTop="8dp"
+        android:hint="Modifier le contenu de la discussion"
+        android:visibility="gone"
+        android:background="@android:color/white"
+        android:padding="8dp"
+        android:textSize="16sp" />
+
+    <!-- Bouton de sauvegarde de la discussion (Visible après modification) -->
+    <Button
+        android:id="@+id/save_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sauvegarder"
+        android:layout_below="@id/edit_discussion_content"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="#0077b6"
+        android:textColor="@android:color/white"
+        android:visibility="gone"
+        android:layout_centerHorizontal="true" />
+
+    <!-- Section de la publication principale -->
+    <RelativeLayout
+        android:id="@+id/main_post_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/save_button"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/discussion_background"
+        android:padding="16dp">
+
+        <!-- Contenu de la publication -->
+        <TextView
+            android:id="@+id/post_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Contenu de la publication"
+            android:textColor="@android:color/white"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="8dp"
+            android:textSize="16sp" />
+
+        <!-- Détails de la publication (auteur, date, heure) -->
+        <TextView
+            android:id="@+id/post_details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Auteur : nom de l'auteur • 11 May, 08:15 am"
+            android:textColor="@android:color/white"
+            android:layout_below="@id/post_content"
+            android:layout_marginTop="8dp"
+            android:textSize="12sp" />
+    </RelativeLayout>
+
+    <!-- Section des commentaires -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_comments"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_below="@id/main_post_container"
+        android:layout_above="@id/btn_load_more_comments"
+        android:layout_marginTop="16dp" />
+
+    <!-- Bouton de pagination pour charger plus de commentaires -->
+    <Button
+        android:id="@+id/btn_load_more_comments"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Charger plus"
+        android:layout_above="@id/add_comment_section"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="#0077b6"
+        android:textColor="@android:color/white" />
+
+    <!-- Section Ajouter un commentaire -->
+    <LinearLayout
+        android:id="@+id/add_comment_section"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        android:background="@drawable/discussion_background">
+
+        <EditText
+            android:id="@+id/add_comment"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="1"
+            android:hint="Ajouter un commentaire"
+            android:padding="8dp"
+            android:textColor="@android:color/white"
+            android:textColorHint="@android:color/white" />
+
+
+        <Button
+            android:id="@+id/submit_comment_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Envoyer"
+            android:backgroundTint="#0077b6"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
+</RelativeLayout>
