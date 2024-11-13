@@ -1,5 +1,6 @@
 package com.example.bookingapp.FlightManagement;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
@@ -27,7 +28,7 @@ import java.util.concurrent.Executors;
 
 public class UpdateFlight extends AppCompatActivity {
 
-    private EditText matriculeFlight, selectedFlightDate, from, to, seats, selectedDepartureTime, selectedArrivalTime, pointEscale;
+    private EditText matriculeFlight, priceView, selectedFlightDate, from, to, seats, selectedDepartureTime, selectedArrivalTime, pointEscale;
     private Button arrivalTimeButton, btnShowTimeDialog, btnShowDialog, btnAdd, btnCancel;
     private AppDatabase database;
     private FlightDao flightDao;
@@ -35,6 +36,7 @@ public class UpdateFlight extends AppCompatActivity {
 
     private ExecutorService executor = Executors.newSingleThreadExecutor();
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +66,7 @@ public class UpdateFlight extends AppCompatActivity {
         selectedArrivalTime = findViewById(R.id.selectedArrivalTime);
         btnAdd = findViewById(R.id.btnAdd);
         btnCancel = findViewById(R.id.btnCancel);
+        priceView=findViewById(R.id.price);
 
         // Récupération des données du vol via Intent
         Intent intent = getIntent();
@@ -75,6 +78,7 @@ public class UpdateFlight extends AppCompatActivity {
         seats.setText(intent.getStringExtra("seats"));
         selectedDepartureTime.setText(intent.getStringExtra("departureTime"));
         selectedArrivalTime.setText(intent.getStringExtra("arrivalTime"));
+        priceView.setText( intent.getDoubleExtra("price",100.0)+"");
 
         // Gestion du clic sur le bouton Ajouter
         btnAdd.setOnClickListener(v -> {
@@ -87,6 +91,7 @@ public class UpdateFlight extends AppCompatActivity {
                 String updatedSeats = seats.getText().toString();
                 String updatedDepartureTime = selectedDepartureTime.getText().toString();
                 String updatedArrivalTime = selectedArrivalTime.getText().toString();
+                double updateprice =  Double.parseDouble(priceView.getText().toString());
                 Log.d("MyActivity", "User name is: " + id);
 
                 // Mise à jour du vol dans la base de données
@@ -99,6 +104,7 @@ public class UpdateFlight extends AppCompatActivity {
                 updatedFlight.setFrom(updatedFrom);
                 updatedFlight.setDepartureTime(updatedDepartureTime);
                 updatedFlight.setArrivalTime(updatedArrivalTime);
+                updatedFlight.setPrice(updateprice);
 
                 // Mise à jour dans la base de données en utilisant ExecutorService
                 updateFlightInDatabase(updatedFlight);
@@ -166,7 +172,7 @@ public class UpdateFlight extends AppCompatActivity {
     private boolean validateInputs() {
         boolean isValid = true;
         if (TextUtils.isEmpty(matriculeFlight.getText())) {
-            runOnUiThread(() -> Toast.makeText(UpdateFlight.this, "des champs vides !!", Toast.LENGTH_SHORT).show());
+            runOnUiThread(() -> Toast.makeText(UpdateFlight.this, "Tous les champs sont valides", Toast.LENGTH_SHORT).show());
 
             isValid = false;
         } else {
@@ -195,6 +201,8 @@ public class UpdateFlight extends AppCompatActivity {
             try {
                 flightDao.updateFlight(updatedFlight);
                 runOnUiThread(() -> Toast.makeText(UpdateFlight.this, "Vol mis à jour avec succès", Toast.LENGTH_SHORT).show());
+                Intent intent = new Intent(UpdateFlight.this, FlightList.class);
+                startActivity(intent);
             } catch (Exception e) {
                 e.printStackTrace();
                 runOnUiThread(() -> Toast.makeText(UpdateFlight.this, "Échec de la mise à jour du vol", Toast.LENGTH_SHORT).show());

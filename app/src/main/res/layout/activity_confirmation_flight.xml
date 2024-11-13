@@ -1,0 +1,49 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/gradient_end"
+    android:padding="16dp">
+
+    <!-- Titre -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:text="Confirm your Booking Flight Now"
+        android:textSize="18sp" />
+
+    <!-- Image centrée -->
+
+    <!-- Champ de texte pour l'email -->
+    <ImageView
+        android:layout_width="257dp"
+        android:layout_height="197dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:src="@drawable/emailbg" />
+
+    <EditText
+        android:id="@+id/emailField"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Email address"
+        android:background="@drawable/rounded_edit_text"
+        android:padding="12dp"
+        android:layout_marginBottom="12dp"
+        android:inputType="textEmailAddress"
+        android:layout_marginTop="16dp" />
+
+    <!-- Bouton -->
+    <Button
+        android:id="@+id/btnConfirmEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/button_background"
+        android:text="Send Confirmation Email"
+        android:layout_marginTop="16dp" />
+
+</LinearLayout>

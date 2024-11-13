@@ -1,0 +1,48 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@color/white"
+    android:padding="16dp">
+
+    <!-- Titre de remerciement -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Thank You for Your Booking!"
+        android:textSize="24sp"
+        android:textColor="@color/black"
+        android:gravity="center"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="40dp"/>
+
+    <!-- Message de confirmation -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Your booking has been successfully confirmed."
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:gravity="center"
+        android:layout_marginBottom="20dp"/>
+
+    <!-- Message de remerciement -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Thank you for choosing us. We appreciate your trust!"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:gravity="center"
+        android:layout_marginBottom="40dp"/>
+
+    <!-- Bouton pour revenir à l'écran d'accueil ou d'autres actions -->
+    <Button
+        android:id="@+id/btnBackToHome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Back to Book"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/button_background"/>
+</LinearLayout>

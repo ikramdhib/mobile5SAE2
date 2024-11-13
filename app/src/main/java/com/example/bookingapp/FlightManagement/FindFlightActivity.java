@@ -67,8 +67,8 @@ public class FindFlightActivity extends AppCompatActivity {
 
         // Écouteur pour le calendrier
         calendarView.setOnDateChangeListener((view, year, month, dayOfMonth) -> {
-            // Formater la date en jour/mois/année
-            selectedDate[0] = String.format("%02d/%02d/%d", dayOfMonth, month + 1, year);
+            // Formater la date en année-mois-jour
+            selectedDate[0] = String.format("%04d-%02d-%02d", year, month + 1, dayOfMonth);
         });
 
         // Bouton "Confirmer"
@@ -87,5 +87,6 @@ public class FindFlightActivity extends AppCompatActivity {
         // Affiche le dialogue
         dialog.show();
     }
+
 
 }

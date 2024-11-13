@@ -41,4 +41,5 @@ public interface ReservationFlightDao {
     // Obtenir toutes les réservations pour un vol spécifique
     @Query("SELECT * FROM ReservationFlight WHERE flightId = :flightId")
     List<ReservationFlight> getReservationsByFlightId(int flightId);
+
 }

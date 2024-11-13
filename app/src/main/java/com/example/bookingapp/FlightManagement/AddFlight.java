@@ -2,6 +2,7 @@ package com.example.bookingapp.FlightManagement;
 
 import android.annotation.SuppressLint;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -23,7 +24,7 @@ import java.util.Calendar;
 
 public class AddFlight extends AppCompatActivity {
 
-    private EditText matriculeFlight, departureTime, flightDate, from, to, seats, arrivalTime, pointEscale;
+    private EditText matriculeFlight,  from, to, seats, priceView;
     private EditText selectedFlightDate, selectedDepartureTime, selectedArrivalTime;
     private Button btnShowTimeDialog, btnShowDialog, btnAdd, btnCancel;
 
@@ -116,6 +117,7 @@ public class AddFlight extends AppCompatActivity {
         seats = findViewById(R.id.seats);
         btnAdd = findViewById(R.id.btnAdd);
         btnCancel = findViewById(R.id.btnCancel);
+        priceView = findViewById(R.id.price);
 
         // Action du bouton ajouter
         btnAdd.setOnClickListener(v -> {
@@ -126,6 +128,7 @@ public class AddFlight extends AppCompatActivity {
             String seatCount = seats.getText().toString();
             String depTime = selectedDepartureTime.getText().toString();
             String arrTime = selectedArrivalTime.getText().toString();
+            double price = Double.parseDouble(priceView.getText().toString());
 
             boolean isValid = true;
 
@@ -144,6 +147,7 @@ public class AddFlight extends AppCompatActivity {
                 newFlight.setTo(toLocation);
                 newFlight.setArrivalTime(arrTime);
                 newFlight.setDepartureTime(depTime);
+                newFlight.setPrice(price);
 
                 new AddFlightAsyncTask(flightDao).execute(newFlight);
             }
@@ -170,6 +174,9 @@ public class AddFlight extends AppCompatActivity {
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
             Toast.makeText(AddFlight.this, "Flight added successfully!", Toast.LENGTH_SHORT).show();
+
+            Intent intent = new Intent(AddFlight.this, FlightList.class);
+            startActivity(intent);
         }
     }
 }

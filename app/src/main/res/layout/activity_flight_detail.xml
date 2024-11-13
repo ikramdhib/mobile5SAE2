@@ -143,11 +143,11 @@ android:layout_marginBottom="12dp">
             android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/arrivalTimeTextView"
+            android:id="@+id/price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="Duration: 10 Hours"
+            android:text="price 50dt"
             android:textColor="@android:color/black"
             android:textSize="16sp" />
 

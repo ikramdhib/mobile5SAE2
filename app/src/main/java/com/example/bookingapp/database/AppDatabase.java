@@ -35,7 +35,7 @@ import com.example.bookingapp.entity.User;
 @Database(entities = {User.class , Hotel.class , Transport.class,
         Flight.class , Discusion.class , Response.class, Chambre.class , Categorie.class,
         ReservationHotel.class, ReservationTransport.class, ReservationFlight.class,
-        Bus.class, Car.class}, version = 1, exportSchema = false)
+        Bus.class, Car.class}, version = 2, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
     private static AppDatabase instance;
@@ -57,6 +57,7 @@ public abstract class AppDatabase extends RoomDatabase {
         if (instance == null) {
             instance = Room.databaseBuilder(context.getApplicationContext(), AppDatabase.class, "booking_table")
                     .allowMainThreadQueries()
+                    .fallbackToDestructiveMigration()
                     .addCallback(new RoomDatabase.Callback() {
                         @Override
                         public void onOpen(SupportSQLiteDatabase db) {
@@ -68,18 +69,6 @@ public abstract class AppDatabase extends RoomDatabase {
                     .build();
         }
         return instance;
-    }
-
-    // Méthode pour réactiver les contraintes de clé étrangère
-    public static void enableForeignKeyConstraints(Context context) {
-        SupportSQLiteDatabase db = getAppDatabase(context).getOpenHelper().getWritableDatabase();
-        db.execSQL("PRAGMA foreign_keys = ON;");
-    }
-
-    // Méthode pour désactiver les contraintes de clé étrangère (par exemple pour les tests)
-    public static void disableForeignKeyConstraints(Context context) {
-        SupportSQLiteDatabase db = getAppDatabase(context).getOpenHelper().getWritableDatabase();
-        db.execSQL("PRAGMA foreign_keys = OFF;");
     }
 
 

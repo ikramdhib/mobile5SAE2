@@ -1,5 +1,6 @@
 package com.example.bookingapp.FlightManagement;
 
+import android.annotation.SuppressLint;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,9 +24,10 @@ public class FlightDetail extends AppCompatActivity {
     private AppDatabase appDatabase;
     private FlightDao flightDao;
 
-    private TextView matriculeTextView, fromTextView, toTextView, dateTextView, seatsTextView, depTimeTextView, arrTimeTextView, typeTextView, escalePointTextView;
+    private TextView matriculeTextView, priveView, fromTextView, toTextView, dateTextView, seatsTextView, depTimeTextView, arrTimeTextView, typeTextView, escalePointTextView;
     private Button editButton, deleteButton;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +50,7 @@ public class FlightDetail extends AppCompatActivity {
        // escalePointTextView = findViewById(R.id.pointEscaleTextView);
         editButton = findViewById(R.id.editButton);
         deleteButton = findViewById(R.id.deleteButton);
+        priveView = findViewById(R.id.price);
 
         // Obtenir l'objet Flight à partir de l'intent
         Flight flight = (Flight) getIntent().getSerializableExtra("flight");
@@ -62,6 +65,7 @@ public class FlightDetail extends AppCompatActivity {
             depTimeTextView.setText(flight.getDepartureTime());
             arrTimeTextView.setText(flight.getArrivalTime());
             typeTextView.setText(flight.getType());
+            priveView.setText(flight.getPrice()+ "DT");
             Log.d("MyActivity", "User name is: " + flight.getId());
           //  escalePointTextView.setText(flight.getType().equals("Escale") ? flight.getEscalePoint() : "N/A");
         }
@@ -78,6 +82,7 @@ public class FlightDetail extends AppCompatActivity {
             intent.putExtra("departureTime", flight.getDepartureTime());
             intent.putExtra("arrivalTime", flight.getArrivalTime());
             intent.putExtra("flightType", flight.getType());
+            intent.putExtra("price",flight.getPrice());
             startActivityForResult(intent, REQUEST_CODE_EDIT_FLIGHT);
         });
 

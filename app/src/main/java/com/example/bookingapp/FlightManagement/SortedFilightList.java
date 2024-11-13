@@ -76,6 +76,7 @@ public class SortedFilightList extends AppCompatActivity {
                             "From: " + flight.getFrom() + "\n" +
                             "To: " + flight.getTo() + "\n" +
                             "Date: " + flight.getFlightDate() + "\n" +
+                            "Price/parson :" +flight.getPrice() +"\n"+
                             "Seats: " + flight.getNbSeats()
             );
 
@@ -94,7 +95,7 @@ public class SortedFilightList extends AppCompatActivity {
                 intent.putExtra("departureTime", flight.getDepartureTime()); // Assurez-vous que ces méthodes existent
                 intent.putExtra("arrivalTime", flight.getArrivalTime()); // Assurez-vous que ces méthodes existent
                 intent.putExtra("nbSeats", flight.getNbSeats()); // Si vous voulez aussi passer le nombre de sièges disponibles
-                intent.putExtra("pricePerPassenger", 100.00); // Vous pouvez aussi ajuster ce prix selon votre logique
+                intent.putExtra("price", flight.getPrice()); // Vous pouvez aussi ajuster ce prix selon votre logique
 
                 // Démarrer l'activité de réservation
                 startActivity(intent);

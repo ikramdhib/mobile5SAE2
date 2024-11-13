@@ -39,6 +39,8 @@ public class Flight  implements Serializable {
 
     private String type;
 
+    private double price ;
+
     public Flight() {
     }
 
@@ -67,6 +69,14 @@ public class Flight  implements Serializable {
         this.flightDate = flightDate;
         this.arrivalTime = arrivalTime;
         this.flightMatricule = flightMatricule;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     public int getId() {
@@ -171,6 +181,7 @@ public class Flight  implements Serializable {
                 ", to='" + to + '\'' +
                 ", duration=" + duration +
                 ", type='" + type + '\'' +
+                ", price=" + price +
                 '}';
     }
 }
