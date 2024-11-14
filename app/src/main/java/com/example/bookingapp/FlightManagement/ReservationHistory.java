@@ -60,7 +60,7 @@ public class ReservationHistory extends AppCompatActivity {
         }).start();
     }
 
-    public boolean isModifyAllowed(String reservationDate) {
+    public boolean isModifyButtonEnabled(String reservationDate) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         try {
             Date flightDate = dateFormat.parse(reservationDate);
@@ -96,8 +96,11 @@ public class ReservationHistory extends AppCompatActivity {
             holder.flightPrice.setText("Price: $" + reservation.getPrice());
             holder.status.setText("Status: " + reservation.getStatus());
 
-            boolean isModifyAllowed = activity.isModifyAllowed(reservation.getCreatedAt());
+            boolean isEnabled = activity.isModifyButtonEnabled(reservation.getCreatedAt());
+            holder.cancelButton.setEnabled(isEnabled);
             holder.cancelButton.setEnabled(!reservation.getStatus().equals("Cancelled"));
+
+
             holder.cancelButton.setOnClickListener(v -> {
                 new Thread(() -> {
                     try {
@@ -107,6 +110,7 @@ public class ReservationHistory extends AppCompatActivity {
 
                         activity.runOnUiThread(() -> {
                             holder.status.setText("Status: Cancelled");
+                            holder.modifyButton.setEnabled(false);
                             holder.cancelButton.setEnabled(false);
                             Toast.makeText(activity, "Reservation cancelled", Toast.LENGTH_SHORT).show();
                         });
@@ -147,8 +151,7 @@ public class ReservationHistory extends AppCompatActivity {
                 flightPrice = itemView.findViewById(R.id.flightPrice);
                 status = itemView.findViewById(R.id.status);
                 deleteButton = itemView.findViewById(R.id.btnDelete);
-                modifyButton = itemView.findViewById(R.id.btnModifyReservation);
-                cancelButton = itemView.findViewById(R.id.btnModifyReservation);
+                cancelButton = itemView.findViewById(R.id.btnModifyReservation); // New cancel button
             }
         }
     }
